@@ -1,9 +1,26 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navber = () => {
+  const { user, logOut } = useContext(AuthContext); // Auth context for user and logout
+  const navigate = useNavigate();
+
+  // Handle Logout
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        alert("Logged out successfully!");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Logout failed: ", error);
+      });
+  };
+
   return (
-    <div className="w-full mx-auto navbar bg-gray-400">
+    <div className="navbar bg-gray-400 w-full mx-auto">
+      {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -24,7 +41,7 @@ const Navber = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
+            className="menu menu-sm dropdown-content mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-[1]"
           >
             <li>
               <NavLink to="/" className="hover:bg-primary">
@@ -63,62 +80,78 @@ const Navber = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl ">Food Sharing</a>
+        <a className="btn btn-ghost text-xl">Food Sharing</a>
       </div>
 
-      <div className="navbar-center hidden lg:flex ">
+      {/* Navbar Center */}
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <NavLink
-              to="/"
-              activeClassName="text-primary"
-              className="hover:bg-primary"
-            >
+            <NavLink to="/" className="hover:bg-primary" activeClassName="text-primary">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/available-foods"
-              activeClassName="text-primary"
-              className="hover:bg-primary"
-            >
+            <NavLink to="/available-foods" className="hover:bg-primary" activeClassName="text-primary">
               Available Foods
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/add-food"
-              activeClassName="text-primary"
-              className="hover:bg-primary"
-            >
+            <NavLink to="/add-food" className="hover:bg-primary" activeClassName="text-primary">
               Add Food
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/manage-my-foods"
-              activeClassName="text-primary"
-              className="hover:bg-primary"
-            >
+            <NavLink to="/manage-my-foods" className="hover:bg-primary" activeClassName="text-primary">
               Manage My Foods
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/my-food-request"
-              activeClassName="text-primary"
-              className="hover:bg-primary"
-            >
+            <NavLink to="/my-food-request" className="hover:bg-primary" activeClassName="text-primary">
               My Food Request
             </NavLink>
           </li>
         </ul>
       </div>
 
+      {/* Navbar End */}
       <div className="navbar-end gap-3">
-        <a href="/login">Login</a>
-        <a href="/register">Signup</a>
+        <NavLink to="/register">
+          <button className="btn">SignUp</button>
+        </NavLink>
+        <div className="flex items-center gap-4">
+          {/* User Avatar */}
+          <div className="w-14 h-14">
+            {user && user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="User Avatar"
+                className="rounded-full"
+              />
+            ) : (
+              <div className="w-12 h-12 rounded-full border bg-gray-500 flex items-center justify-center">
+                <span className="text-white font-bold">U</span>
+              </div>
+            )}
+          </div>
+
+          {/* Login/Logout Button */}
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="btn bg-yellow-300 hover:bg-yellow-400 text-black dark:bg-yellow-500 dark:hover:bg-yellow-600"
+            >
+              Logout
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              className="btn bg-yellow-300 hover:bg-yellow-400 text-black dark:bg-yellow-500 dark:hover:bg-yellow-600"
+            >
+              Login
+            </NavLink>
+          )}
+        </div>
       </div>
     </div>
   );

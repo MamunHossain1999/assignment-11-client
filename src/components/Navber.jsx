@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Navber = () => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="w-full mx-auto navbar bg-gray-400">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -57,7 +57,7 @@ const Navber = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/signup" className="hover:bg-primary">
+              <NavLink to="/register" className="hover:bg-primary">
                 Signup
               </NavLink>
             </li>
@@ -118,7 +118,7 @@ const Navber = () => {
 
       <div className="navbar-end gap-3">
         <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
+        <a href="/register">Signup</a>
       </div>
     </div>
   );

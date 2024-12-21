@@ -5,6 +5,12 @@ import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
 import Register from '../Authontication/Register';
 import Login from '../Authontication/Login';
+import AvailableFood from '../pages/AvailableFood';
+import PrivateRoute from '../pages/PrivateRoute';
+import AddFood from '../pages/AddFood';
+import ManageMyFoods from '../pages/ManageMyFoods';
+import MyFoodRequest from '../pages/MyFoodRequest';
+
 
   const router = createBrowserRouter([
     {
@@ -14,6 +20,22 @@ import Login from '../Authontication/Login';
         {
         path: '/',
         element: <Home/>
+      },
+      {
+        path: '/available-foods',
+        element: <PrivateRoute><AvailableFood/></PrivateRoute>
+      },
+      {
+        path: '/add-food',
+        element: <PrivateRoute><AddFood/></PrivateRoute>
+      },
+      {
+        path: '/manage-my-foods',
+        element: <PrivateRoute><ManageMyFoods/></PrivateRoute>
+      },
+      {
+        path: '/my-food-request',
+        element: <PrivateRoute><MyFoodRequest/></PrivateRoute>
       },
       {
         path: '*',

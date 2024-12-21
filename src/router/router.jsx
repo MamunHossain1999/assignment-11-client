@@ -1,7 +1,8 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayOut from '../mainLayOut/MainLayOut';
-import Navber from '../components/Navber';
+import Home from '../pages/Home';
+import ErrorPage from '../pages/ErrorPage';
 
   const router = createBrowserRouter([
     {
@@ -10,7 +11,11 @@ import Navber from '../components/Navber';
       children: [
         {
         path: '/',
-        element: <Navber/>
+        element: <Home/>
+      },
+      {
+        path: '*',
+        element: <ErrorPage/>
       }
     ]
     },

@@ -87,27 +87,27 @@ const Navber = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <NavLink to="/" className="hover:bg-primary" activeClassName="text-primary">
+            <NavLink to="/" className="hover:bg-primary">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/available-foods" className="hover:bg-primary" activeClassName="text-primary">
+            <NavLink to="/available-foods" className="hover:bg-primary">
               Available Foods
             </NavLink>
           </li>
           <li>
-            <NavLink to="/add-food" className="hover:bg-primary" activeClassName="text-primary">
+            <NavLink to="/add-food" className="hover:bg-primary">
               Add Food
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-my-foods" className="hover:bg-primary" activeClassName="text-primary">
+            <NavLink to="/manage-my-foods" className="hover:bg-primary">
               Manage My Foods
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-food-request" className="hover:bg-primary" activeClassName="text-primary">
+            <NavLink to="/my-food-request" className="hover:bg-primary">
               My Food Request
             </NavLink>
           </li>
@@ -124,6 +124,7 @@ const Navber = () => {
           <div className="w-14 h-14">
             {user && user.photoURL ? (
               <img
+                referrerPolicy="no-referrer"
                 src={user.photoURL}
                 alt="User Avatar"
                 className="rounded-full"

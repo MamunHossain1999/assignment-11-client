@@ -7,16 +7,16 @@ const Login = () => {
   const { signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // For navigation
   const location = useLocation();
-  const from = location?.state || "/";
+  const from = location?.state || "/"; // Redirect back after login
 
   // Google SignIn
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
       toast.success("SignIn Successful");
-      navigate(from, { replace: true });
+      navigate(from || "/home", { replace: true }); // Redirect to home page if not from any page
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
@@ -45,7 +45,7 @@ const Login = () => {
       // User Login
       await signIn(email, pass);
       toast.success("Signin Successful");
-      navigate(from, { replace: true });
+      navigate(from || "/home", { replace: true }); // Redirect to home page if not from any page
     } catch (err) {
       console.log(err);
       toast.error(err?.message);

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext); // User context
   const [foods, setFoods] = useState([]); // Foods state
-  const [selectedFood, setSelectedFood] = useState(null); // For update modal
+  const navigate = useNavigate(); // For navigation
 
   // Fetch user's foods
   useEffect(() => {
@@ -31,22 +32,9 @@ const ManageMyFoods = () => {
     }
   };
 
-  // Update food (open modal)
-  const handleUpdate = (food) => {
-    setSelectedFood(food); // Set selected food to state
-  };
-
-  // Submit updated food
-  const handleUpdateSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .put(`http://localhost:5000/foods/${selectedFood._id}`, selectedFood)
-      .then(() => {
-        alert('Food updated successfully!');
-        setSelectedFood(null); // Close modal
-        setFoods(foods.map((food) => (food._id === selectedFood._id ? selectedFood : food)));
-      })
-      .catch((error) => console.error('Error updating food:', error));
+  // Navigate to Update Food Page
+  const handleUpdate = (id) => {
+    navigate(`/update-food/${id}`); // Navigate to update page with food ID
   };
 
   return (
@@ -68,7 +56,7 @@ const ManageMyFoods = () => {
               <td className="border px-4 py-2">
                 <button
                   className="btn btn-warning btn-sm mr-2"
-                  onClick={() => handleUpdate(food)}
+                  onClick={() => handleUpdate(food._id)} // Pass food ID
                 >
                   Update
                 </button>
@@ -83,49 +71,6 @@ const ManageMyFoods = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Update Food Modal */}
-      {selectedFood && (
-        <div className="modal">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Update Food</h3>
-            <form onSubmit={handleUpdateSubmit}>
-              <div className="mb-4">
-                <label className="block mb-1">Food Name</label>
-                <input
-                  type="text"
-                  value={selectedFood.foodName}
-                  onChange={(e) =>
-                    setSelectedFood({ ...selectedFood, foodName: e.target.value })
-                  }
-                  className="input input-bordered w-full"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-1">Food Quantity</label>
-                <input
-                  type="text"
-                  value={selectedFood.foodQuantity}
-                  onChange={(e) =>
-                    setSelectedFood({ ...selectedFood, foodQuantity: e.target.value })
-                  }
-                  className="input input-bordered w-full"
-                />
-              </div>
-              <div className="modal-action">
-                <button type="submit" className="btn btn-primary">Save</button>
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setSelectedFood(null)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

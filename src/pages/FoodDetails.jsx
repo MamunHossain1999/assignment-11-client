@@ -1,28 +1,30 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { AuthContext } from '../providers/AuthProvider';
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
 
 const FoodDetails = () => {
-  const { user } = useContext(AuthContext);  
-  const { id } = useParams();  
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
   const [food, setFood] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch food details by id (GET request)
-    axios.get(`http://localhost:5000/foods/${id}`)
-      .then(response => {
+    axios
+      .get(`http://localhost:5000/foods/${id}`)
+      .then((response) => {
         setFood(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching food details:', error);
+      .catch((error) => {
+        console.error("Error fetching food details:", error);
       });
-  }, [id]);  // Re-fetch food details when the id changes
+  }, [id]); // Re-fetch food details when the id changes
 
   const handleRequest = () => {
     if (!user) {
-      alert('Please login to make a request');
+      alert("Please login to make a request");
       return;
     }
 
@@ -32,7 +34,7 @@ const FoodDetails = () => {
       foodId: food.id,
       donatorEmail: food.donatorEmail,
       donatorName: food.donatorName,
-      userEmail: user.email,  // User email from context
+      userEmail: user.email, // User email from context
       requestDate: new Date().toISOString(),
       pickupLocation: food.pickupLocation,
       expireDate: food.expireDate,
@@ -40,23 +42,25 @@ const FoodDetails = () => {
     };
 
     // Add to My Request Foods and change status to 'requested'
-    axios.post('http://localhost:5000/my-request-foods', requestData)
+    axios
+      .post("http://localhost:5000/my-request-foods", requestData)
       .then(() => {
         // Update food status to requested
-        axios.put(`http://localhost:5000/foods/${food.id}`, {
-          ...food,
-          foodStatus: 'requested',
-        })
-          .then(() => {
-            alert('Request Successful!');
-            setShowModal(false);  // Hide modal after successful request
+        axios
+          .put(`http://localhost:5000/foods/${food.id}`, {
+            ...food,
+            foodStatus: "requested",
           })
-          .catch(error => {
-            console.error('Error updating food status:', error);
+          .then(() => {
+            alert("Request Successful!");
+            setShowModal(false); // Hide modal after successful request
+          })
+          .catch((error) => {
+            console.error("Error updating food status:", error);
           });
       })
-      .catch(error => {
-        console.error('Error requesting food:', error);
+      .catch((error) => {
+        console.error("Error requesting food:", error);
       });
   };
 
@@ -66,31 +70,45 @@ const FoodDetails = () => {
 
   return (
     <div className="w-full mx-auto p-4 border my-4 justify-center items-center">
-      <img src={food.foodImage} alt={food.foodName} className="w-96 h-64 object-cover rounded-lg" />
+      <img
+        src={food.foodImage}
+        alt={food.foodName}
+        className="w-96 h-64 object-cover rounded-lg"
+      />
       <h2 className="text-2xl font-bold">{food.foodName}</h2>
       <p>{food.additionalNotes}</p>
       <div>
-        <p><strong>Pickup Location:</strong> {food.pickupLocation}</p>
-        <p><strong>Expire Date:</strong> {food.expireDate}</p>
-        <p><strong>Donator:</strong> {food.donatorName} ({food.donatorEmail})</p>
+        <p>
+          <strong>Pickup Location:</strong> {food.pickupLocation}
+        </p>
+        <p>
+          <strong>Expire Date:</strong> {food.expireDate}
+        </p>
+        <p>
+          <strong>Donator:</strong> {food.donatorName} ({food.donatorEmail})
+        </p>
       </div>
-      <button className="btn btn-primary" onClick={() => setShowModal(true)}>Request</button>
+      <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+        Request
+      </button>
 
       {/* Request Modal */}
       {showModal && (
-        <div className="modal modal-open"> {/* Ensure 'modal-open' class is added */}
+        <div className="modal modal-open">
+          {" "}
+          {/* Ensure 'modal-open' class is added */}
           <div className="modal-box">
             <h2 className="text-xl font-semibold mb-4">Request Food</h2>
-            
+
             {/* Image section with top alignment */}
             <div className="flex justify-center mb-4">
-              <img 
-                src={food.foodImage} 
-                alt={food.foodName} 
-                className="w-44 h-44 object-cover rounded-full border-4 border-primary" 
+              <img
+                src={food.foodImage}
+                alt={food.foodName}
+                className="w-44 h-44 object-cover rounded-full border-4 border-primary"
               />
             </div>
-            
+
             <form>
               <div>
                 <label>Food Name</label>
@@ -110,23 +128,40 @@ const FoodDetails = () => {
               </div>
               <div>
                 <label>User Email</label>
-                <input type="email" value={user ? user.email : ''} readOnly />
+                <input type="email" value={user ? user.email : ""} readOnly />
               </div>
               <div>
                 <label>Request Date</label>
-                <input type="text" value={new Date().toLocaleString()} readOnly />
+                <input
+                  type="text"
+                  value={new Date().toLocaleString()}
+                  readOnly
+                />
               </div>
               <div>
                 <label>Additional Notes</label>
-                <textarea 
-                  value={food.additionalNotes} 
-                  onChange={(e) => setFood({ ...food, additionalNotes: e.target.value })}
+                <textarea
+                  value={food.additionalNotes}
+                  onChange={(e) =>
+                    setFood({ ...food, additionalNotes: e.target.value })
+                  }
                 />
               </div>
             </form>
             <div className="modal-action">
-              <button className="btn" onClick={handleRequest}>Request</button>
-              <button className="btn" onClick={() => setShowModal(false)}>Cancel</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  handleRequest();
+                  navigate("/manage-my-foods"); // Request সফল হলে রিডিরেক্ট হবে
+                }}
+              >
+                Request
+              </button>
+
+              <button className="btn" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>

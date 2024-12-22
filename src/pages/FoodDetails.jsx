@@ -49,7 +49,7 @@ const FoodDetails = () => {
         })
           .then(() => {
             alert('Request Successful!');
-            setShowModal(false);
+            setShowModal(false);  // Hide modal after successful request
           })
           .catch(error => {
             console.error('Error updating food status:', error);
@@ -65,9 +65,9 @@ const FoodDetails = () => {
   }
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full mx-auto p-4 border my-4 justify-center items-center">
+      <img src={food.foodImage} alt={food.foodName} className="w-96 h-64 object-cover rounded-lg" />
       <h2 className="text-2xl font-bold">{food.foodName}</h2>
-      <img src={food.foodImage} alt={food.foodName} className="w-full h-64 object-cover" />
       <p>{food.additionalNotes}</p>
       <div>
         <p><strong>Pickup Location:</strong> {food.pickupLocation}</p>
@@ -78,17 +78,23 @@ const FoodDetails = () => {
 
       {/* Request Modal */}
       {showModal && (
-        <div className="modal">
+        <div className="modal modal-open"> {/* Ensure 'modal-open' class is added */}
           <div className="modal-box">
-            <h2>Request Food</h2>
+            <h2 className="text-xl font-semibold mb-4">Request Food</h2>
+            
+            {/* Image section with top alignment */}
+            <div className="flex justify-center mb-4">
+              <img 
+                src={food.foodImage} 
+                alt={food.foodName} 
+                className="w-44 h-44 object-cover rounded-full border-4 border-primary" 
+              />
+            </div>
+            
             <form>
               <div>
                 <label>Food Name</label>
                 <input type="text" value={food.foodName} readOnly />
-              </div>
-              <div>
-                <label>Food Image</label>
-                <img src={food.foodImage} alt={food.foodName} className="w-32 h-32 object-cover" />
               </div>
               <div>
                 <label>Food Id</label>
@@ -112,7 +118,10 @@ const FoodDetails = () => {
               </div>
               <div>
                 <label>Additional Notes</label>
-                <textarea value={food.additionalNotes} onChange={(e) => setFood({ ...food, additionalNotes: e.target.value })}></textarea>
+                <textarea 
+                  value={food.additionalNotes} 
+                  onChange={(e) => setFood({ ...food, additionalNotes: e.target.value })}
+                />
               </div>
             </form>
             <div className="modal-action">

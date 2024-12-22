@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import FoodCard from './FoodCard';
 
 const AvailableFood = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortedFoods, setSortedFoods] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
+
+const {id} = useParams();
 
   useEffect(() => {
     // Fetching available foods from the server
@@ -40,10 +42,6 @@ const AvailableFood = () => {
     setSortedFoods(filteredFoods);
   };
 
-  const handleViewDetails = (foodId) => {
-    // Navigate to the food details page
-    navigate(`/food-details/${foodId}`);
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -67,24 +65,9 @@ const AvailableFood = () => {
 
       {/* Foods Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {sortedFoods.map(food => (
-          <div key={food.id} className="card bg-base-100 shadow-xl">
-            <figure>
-              <img src={food.foodImage} alt={food.foodName} className="w-full h-64 object-cover" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{food.foodName}</h2>
-              <p>{food.additionalNotes}</p>
-              <div className="card-actions justify-end">
-                <button 
-                  className="btn btn-primary" 
-                  onClick={() => handleViewDetails(food.id)}>
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+        {sortedFoods.map(food => 
+         <FoodCard food={food}></FoodCard>
+        )}
       </div>
     </div>
   );

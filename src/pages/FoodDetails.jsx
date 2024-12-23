@@ -4,65 +4,71 @@ import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
 const FoodDetails = () => {
-  const { user } = useContext(AuthContext);
-  const { id } = useParams();
+  const { user } = useContext(AuthContext); 
+  const { id } = useParams(); 
   const [food, setFood] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
-    // Fetch food details by id (GET request)
     axios
       .get(`http://localhost:5000/foods/${id}`)
       .then((response) => {
-        setFood(response.data);
+        setFood(response.data); 
       })
       .catch((error) => {
         console.error("Error fetching food details:", error);
       });
-  }, [id]); // Re-fetch food details when the id changes
+  }, [id]);
 
+  // Handle food request
   const handleRequest = () => {
     if (!user) {
       alert("Please login to make a request");
+      navigate("/login"); 
       return;
     }
 
     const requestData = {
       foodName: food.foodName,
       foodImage: food.foodImage,
-      foodId: food.id,
+      foodId: food._id, 
       donatorEmail: food.donatorEmail,
       donatorName: food.donatorName,
-      userEmail: user.email, // User email from context
+      userEmail: user.email, 
       requestDate: new Date().toISOString(),
       pickupLocation: food.pickupLocation,
       expireDate: food.expireDate,
       additionalNotes: food.additionalNotes,
     };
 
-    // Add to My Request Foods and change status to 'requested'
+
     axios
-      .post("http://localhost:5000/my-request-foods", requestData)
+      .post("http://localhost:5000/foodData", requestData) 
       .then(() => {
-        // Update food status to requested
+      
         axios
-          .put(`http://localhost:5000/foods/${food.id}`, {
+          .put(`http://localhost:5000/foods/${food._id}`, {
             ...food,
-            foodStatus: "requested",
+            foodStatus: "requested", 
           })
           .then(() => {
             alert("Request Successful!");
-            setShowModal(false); // Hide modal after successful request
+            setShowModal(false); 
+            navigate("/my-food-request"); 
           })
           .catch((error) => {
             console.error("Error updating food status:", error);
+            alert("Failed to update food status.");
           });
       })
       .catch((error) => {
         console.error("Error requesting food:", error);
+        alert("Failed to request food.");
       });
   };
+
 
   if (!food) {
     return <div>Loading...</div>;
@@ -95,12 +101,8 @@ const FoodDetails = () => {
       {/* Request Modal */}
       {showModal && (
         <div className="modal modal-open">
-          {" "}
-          {/* Ensure 'modal-open' class is added */}
           <div className="modal-box">
             <h2 className="text-xl font-semibold mb-4">Request Food</h2>
-
-            {/* Image section with top alignment */}
             <div className="flex justify-center mb-4">
               <img
                 src={food.foodImage}
@@ -108,15 +110,14 @@ const FoodDetails = () => {
                 className="w-44 h-44 object-cover rounded-full border-4 border-primary"
               />
             </div>
-
             <form>
               <div>
                 <label>Food Name</label>
                 <input type="text" value={food.foodName} readOnly />
               </div>
               <div>
-                <label>Food Id</label>
-                <input type="text" value={food.id} readOnly />
+                <label>Food ID</label>
+                <input type="text" value={food._id} readOnly />
               </div>
               <div>
                 <label>Donator Email</label>
@@ -142,23 +143,14 @@ const FoodDetails = () => {
                 <label>Additional Notes</label>
                 <textarea
                   value={food.additionalNotes}
-                  onChange={(e) =>
-                    setFood({ ...food, additionalNotes: e.target.value })
-                  }
+                  readOnly
                 />
               </div>
             </form>
             <div className="modal-action">
-              <button
-                className="btn"
-                onClick={() => {
-                  handleRequest();
-                  navigate("/manage-my-foods"); // Request সফল হলে রিডিরেক্ট হবে
-                }}
-              >
-                Request
+              <button className="btn" onClick={handleRequest}>
+                Confirm Request
               </button>
-
               <button className="btn" onClick={() => setShowModal(false)}>
                 Cancel
               </button>

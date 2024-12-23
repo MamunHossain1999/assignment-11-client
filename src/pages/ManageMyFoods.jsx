@@ -4,9 +4,9 @@ import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 
 const ManageMyFoods = () => {
-  const { user } = useContext(AuthContext); // User context
-  const [foods, setFoods] = useState([]); // Foods state
-  const navigate = useNavigate(); // For navigation
+  const { user } = useContext(AuthContext); 
+  const [foods, setFoods] = useState([]); 
+  const navigate = useNavigate(); 
 
   // Fetch user's foods
   useEffect(() => {
@@ -26,7 +26,7 @@ const ManageMyFoods = () => {
         .delete(`http://localhost:5000/foods/${id}`)
         .then(() => {
           alert('Food deleted successfully!');
-          setFoods(foods.filter((food) => food._id !== id)); // Remove food from state
+          setFoods(foods.filter((food) => food._id !== id)); 
         })
         .catch((error) => console.error('Error deleting food:', error));
     }
@@ -34,43 +34,46 @@ const ManageMyFoods = () => {
 
   // Navigate to Update Food Page
   const handleUpdate = (id) => {
-    navigate(`/update-food/${id}`); // Navigate to update page with food ID
+    navigate(`/update-food/${id}`);
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Manage My Foods</h2>
-      <table className="table-auto w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border px-4 py-2">Food Name</th>
-            <th className="border px-4 py-2">Quantity</th>
-            <th className="border px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {foods.map((food) => (
-            <tr key={food._id}>
-              <td className="border px-4 py-2">{food.foodName}</td>
-              <td className="border px-4 py-2">{food.foodQuantity}</td>
-              <td className="border px-4 py-2">
-                <button
-                  className="btn btn-warning btn-sm mr-2"
-                  onClick={() => handleUpdate(food._id)} // Pass food ID
-                >
-                  Update
-                </button>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDelete(food._id)}
-                >
-                  Delete
-                </button>
-              </td>
+      <h2 className="text-3xl font-bold text-center mb-6">Manage My Foods</h2>
+      
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border-collapse border border-gray-300 shadow-lg">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="border px-4 py-2">Food Name</th>
+              <th className="border px-4 py-2">Quantity</th>
+              <th className="border px-4 py-2">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="text-gray-800">
+            {foods.map((food) => (
+              <tr key={food._id} className="hover:bg-gray-100 transition-all duration-200">
+                <td className="border px-4 py-2">{food.foodName}</td>
+                <td className="border px-4 py-2">{food.foodQuantity}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    className="btn btn-warning btn-sm mr-2 text-yellow-600 hover:bg-yellow-300 transition-all duration-200"
+                    onClick={() => handleUpdate(food._id)} 
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm text-red-600 hover:bg-red-300 transition-all duration-200"
+                    onClick={() => handleDelete(food._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

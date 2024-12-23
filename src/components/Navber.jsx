@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Navber = () => {
-  const { user, logOut } = useContext(AuthContext); // Auth context for user and logout
+  const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Handle Logout
   const handleLogout = () => {
@@ -19,11 +20,16 @@ const Navber = () => {
   };
 
   return (
-    <div className="navbar bg-gray-400 w-full mx-auto">
+    <div className="navbar bg-gradient-to-r  from-blue-400 to-green-400 w-full mx-auto sticky top-0 z-50">
       {/* Navbar Start */}
-      <div className="navbar-start">
+      <div className="navbar-start flex items-center">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <button
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost lg:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -38,76 +44,107 @@ const Navber = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-          </div>
+          </button>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-[1]"
+            className={`menu menu-sm dropdown-content mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-[1] ${
+              isMenuOpen ? "block" : "hidden"
+            }`}
           >
             <li>
-              <NavLink to="/" className="hover:bg-primary">
+              <NavLink to="/" className="hover:bg-indigo-600 hover:text-white">
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/available-foods" className="hover:bg-primary">
+              <NavLink
+                to="/available-foods"
+                className="hover:bg-indigo-600 hover:text-white"
+              >
                 Available Foods
               </NavLink>
             </li>
             <li>
-              <NavLink to="/add-food" className="hover:bg-primary">
+              <NavLink
+                to="/add-food"
+                className="hover:bg-indigo-600 hover:text-white"
+              >
                 Add Food
               </NavLink>
             </li>
             <li>
-              <NavLink to="/manage-my-foods" className="hover:bg-primary">
+              <NavLink
+                to="/manage-my-foods"
+                className="hover:bg-indigo-600 hover:text-white"
+              >
                 Manage My Foods
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-food-request" className="hover:bg-primary">
+              <NavLink
+                to="/my-food-request"
+                className="hover:bg-indigo-600 hover:text-white"
+              >
                 My Food Request
               </NavLink>
             </li>
             <li>
-              <NavLink to="/login" className="hover:bg-primary">
+              <NavLink
+                to="/login"
+                className="hover:bg-indigo-600 hover:text-white"
+              >
                 Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/register" className="hover:bg-primary">
-                Signup
               </NavLink>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Food Sharing</a>
+
+        {/* Logo */}
+        <NavLink
+          to="/"
+          className="btn btn-ghost text-xl hidden lg:block text-white font-bold bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500 hover:from-pink-600 hover:via-yellow-600 hover:to-orange-600 rounded-lg px-6 py-2"
+        >
+          Food Sharing
+        </NavLink>
       </div>
 
       {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <NavLink to="/" className="hover:bg-primary">
+            <NavLink to="/" className="hover:bg-indigo-600 hover:text-white">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/available-foods" className="hover:bg-primary">
+            <NavLink
+              to="/available-foods"
+              className="hover:bg-indigo-600 hover:text-white"
+            >
               Available Foods
             </NavLink>
           </li>
           <li>
-            <NavLink to="/add-food" className="hover:bg-primary">
+            <NavLink
+              to="/add-food"
+              className="hover:bg-indigo-600 hover:text-white"
+            >
               Add Food
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-my-foods" className="hover:bg-primary">
+            <NavLink
+              to="/manage-my-foods"
+              className="hover:bg-indigo-600 hover:text-white"
+            >
               Manage My Foods
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-food-request" className="hover:bg-primary">
+            <NavLink
+              to="/my-food-request"
+              className="hover:bg-indigo-600 hover:text-white"
+            >
               My Food Request
             </NavLink>
           </li>
@@ -116,9 +153,6 @@ const Navber = () => {
 
       {/* Navbar End */}
       <div className="navbar-end gap-3">
-        <NavLink to="/register">
-          <button className="btn">SignUp</button>
-        </NavLink>
         <div className="flex items-center gap-4">
           {/* User Avatar */}
           <div className="w-14 h-14">
@@ -140,14 +174,14 @@ const Navber = () => {
           {user ? (
             <button
               onClick={handleLogout}
-              className="btn bg-yellow-300 hover:bg-yellow-400 text-black dark:bg-yellow-500 dark:hover:bg-yellow-600"
+              className="btn bg-[rgb(34,193,195)] hover:bg-[rgb(62,153,126)] text-black dark:bg-[rgb(233,30,99)] dark:hover:bg-[rgb(250,82,82)]"
             >
               Logout
             </button>
           ) : (
             <NavLink
               to="/login"
-              className="btn bg-yellow-300 hover:bg-yellow-400 text-black dark:bg-yellow-500 dark:hover:bg-yellow-600"
+              className="btn bg-[rgb(72,61,139)] hover:bg-[rgb(103,194,115)] text-[rgb(255,255,255)]"
             >
               Login
             </NavLink>

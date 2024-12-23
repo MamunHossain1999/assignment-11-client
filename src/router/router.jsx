@@ -41,7 +41,7 @@ import UpdateFood from '../pages/UpdateFood';
       },
       {
         path: '/food/:id',
-        element: <FoodDetails/>
+        element: <PrivateRoute><FoodDetails/></PrivateRoute>
       },
       {
         path: '/my-food-request',

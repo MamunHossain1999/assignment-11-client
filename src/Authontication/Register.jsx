@@ -4,9 +4,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext); // Function to create a user
+  const { createUser } = useContext(AuthContext); 
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const [showPassword, setShowPassword] = useState(false); 
   const navigate = useNavigate();
 
   // Handle Registration
@@ -34,7 +34,7 @@ const Register = () => {
       // Create User
       await createUser(email, password, name, photoURL);
       toast.success("Registration Successful!");
-      navigate("/login"); // Redirect to Login page
+      navigate("/login"); 
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -97,7 +97,7 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"} // Toggle between text and password
+                  type={showPassword ? "text" : "password"} 
                   name="password"
                   placeholder="Your Password"
                   className="input input-bordered w-full"
@@ -106,7 +106,7 @@ const Register = () => {
                 <button
                   type="button"
                   className="absolute inset-y-0 right-2 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)} // Toggle state
+                  onClick={() => setShowPassword(!showPassword)} 
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>

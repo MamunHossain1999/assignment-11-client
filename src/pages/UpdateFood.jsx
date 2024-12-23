@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateFood = () => {
-  const { id } = useParams(); // Food ID from URL params
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [food, setFood] = useState({
     foodName: '',
@@ -29,7 +29,7 @@ const UpdateFood = () => {
       .put(`http://localhost:5000/foods/${id}`, food)
       .then(() => {
         alert('Food updated successfully!');
-        navigate('/manage-my-foods'); // Redirect to Manage My Foods page
+        navigate('/manage-my-foods'); 
       })
       .catch((error) => console.error('Error updating food:', error));
   };

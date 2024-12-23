@@ -2,68 +2,74 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const { signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || "/"; // Redirect back after login
+  const from = location?.state?.from || "/";
 
   // Google SignIn
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      toast.success("SignIn Successful");
-      navigate(from || "/home", { replace: true }); // Redirect to home page if not from any page
+      toast.success("Sign-In Successful");
+      navigate(from, { replace: true });
     } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+      console.error(err);
+      toast.error("Google Sign-In Failed: " + err.message);
     }
   };
 
-  // Email Password SignIn
+  // Email & Password SignIn
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const pass = form.password.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-    // Validate password (uppercase and lowercase)
-    const hasUppercase = /[A-Z]/.test(pass);
-    const hasLowercase = /[a-z]/.test(pass);
-
-    if (!hasUppercase || !hasLowercase) {
+    
+    if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
       setPasswordError(
         "Password must contain at least one uppercase and one lowercase letter."
       );
       return;
     }
+    setPasswordError("");
 
     try {
-      // User Login
-      await signIn(email, pass);
-      toast.success("Signin Successful");
-      navigate(from || "/home", { replace: true }); // Redirect to home page if not from any page
+      await signIn(email, password); 
+      const user = { email };
+
+      // Get JWT Token from Server
+      const { data } = await axios.post("http://localhost:5000/login", user);
+      console.log(data)
+      localStorage.setItem("login", data.token);
+
+      toast.success("Login Successful!");
+      navigate(from || '/home'); 
     } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+      console.error(err);
+      toast.error("Login Failed: " + err.message);
     }
   };
 
   // Forgot Password
-  const handleForgotPassword = async (email) => {
+  const handleForgotPassword = async () => {
+    const email = document.querySelector('input[name="email"]').value;
+
     if (!email) {
-      toast.error("Please enter your email address to reset the password.");
+      toast.error("Please enter your email to reset the password.");
       return;
     }
     try {
-      await resetPassword(email);
+      await resetPassword(email); 
       toast.success("Password reset email sent successfully.");
     } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+      console.error(err);
+      toast.error("Failed to send password reset email: " + err.message);
     }
   };
 
@@ -74,6 +80,8 @@ const Login = () => {
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <form onSubmit={handleSignIn} className="card-body">
             <h1 className="text-5xl font-bold">Login now!</h1>
+
+            {/* Email Input */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -86,6 +94,8 @@ const Login = () => {
                 required
               />
             </div>
+
+            {/* Password Input */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -113,21 +123,19 @@ const Login = () => {
                 <button
                   type="button"
                   className="label-text-alt link link-hover text-blue-500"
-                  onClick={() => {
-                    const email = document.querySelector(
-                      'input[name="email"]'
-                    ).value;
-                    handleForgotPassword(email);
-                  }}
+                  onClick={handleForgotPassword}
                 >
                   Forgot password?
                 </button>
               </label>
             </div>
+
+            {/* Login Button */}
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
 
+            {/* Google Sign-In */}
             <div className="form-control mt-6">
               <button
                 type="button"
@@ -137,14 +145,16 @@ const Login = () => {
                 Google Login
               </button>
             </div>
+
+            {/* Register Redirect */}
             <div className="form-control mt-6">
               <p className="text-sm text-gray-500">
-                Already have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to="/register"
                   className="text-blue-500 hover:underline font-semibold"
                 >
-                  register
+                  Register
                 </Link>
               </p>
             </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 
 const AddFood = () => {
-  const { user } = useContext(AuthContext); // Logged-in user data
+  const { user } = useContext(AuthContext); 
   const [formData, setFormData] = useState({
     foodName: '',
     foodImage: '',
@@ -11,7 +11,7 @@ const AddFood = () => {
     pickupLocation: '',
     expireDate: '',
     additionalNotes: '',
-    foodStatus: 'available', // Default status
+    foodStatus: 'available', 
   });
 
   // Input field update handler
@@ -28,10 +28,10 @@ const AddFood = () => {
     const donatorData = {
       donatorName: user.displayName,
       donatorEmail: user.email,
-      donatorImage: user.photoURL || '', // Optional
+      donatorImage: user.photoURL || '', 
     };
 
-    const dataToSubmit = { ...formData, ...donatorData }; // Combine form data with donator data
+    const dataToSubmit = { ...formData, ...donatorData }; 
 
     // Send data to the server (POST request)
     axios.post('http://localhost:5000/foods', dataToSubmit)
@@ -54,74 +54,79 @@ const AddFood = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 shadow-md bg-white rounded">
-      <h2 className="text-2xl font-bold mb-4">Add a Food</h2>
+    <div className="w-full mx-auto p-8 shadow-lg bg-gradient-to-r from-teal-300 via-rose-200 to-indigo-300 rounded-lg">
+      <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add a Food</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Food Name</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Name</label>
           <input 
             type="text" 
             name="foodName" 
             value={formData.foodName} 
             onChange={handleChange} 
-            className="input input-bordered w-full" 
+            className="input input-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400" 
             required 
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Food Image URL</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Image URL</label>
           <input 
             type="text" 
             name="foodImage" 
             value={formData.foodImage} 
             onChange={handleChange} 
-            className="input input-bordered w-full" 
+            className="input input-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400" 
             required 
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Food Quantity</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Quantity</label>
           <input 
             type="text" 
             name="foodQuantity" 
             value={formData.foodQuantity} 
             onChange={handleChange} 
-            className="input input-bordered w-full" 
+            className="input input-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400" 
             required 
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Pickup Location</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Pickup Location</label>
           <input 
             type="text" 
             name="pickupLocation" 
             value={formData.pickupLocation} 
             onChange={handleChange} 
-            className="input input-bordered w-full" 
+            className="input input-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400" 
             required 
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Expire Date/Time</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Expire Date/Time</label>
           <input 
             type="datetime-local" 
             name="expireDate" 
             value={formData.expireDate} 
             onChange={handleChange} 
-            className="input input-bordered w-full" 
+            className="input input-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400" 
             required 
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Additional Notes</label>
+        <div className="mb-5">
+          <label className="block mb-2 text-lg font-medium text-gray-700">Additional Notes</label>
           <textarea 
             name="additionalNotes" 
             value={formData.additionalNotes} 
             onChange={handleChange} 
-            className="textarea textarea-bordered w-full" 
+            className="textarea textarea-bordered w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
         </div>
-        <button type="submit" className="btn btn-primary w-full">Add Food</button>
+        <button 
+          type="submit" 
+          className="btn btn-primary w-full p-3 rounded-md bg-teal-500 text-white font-semibold hover:bg-teal-600 transition duration-300"
+        >
+          Add Food
+        </button>
       </form>
     </div>
   );

@@ -13,7 +13,7 @@ const UpdateFood = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/foods/${id}` ,{withCredentials: true})
+      .get(`https://food-hazel-three.vercel.app/foods/${id}` ,{withCredentials: true})
       .then((response) => setFood(response.data))
       .catch((error) => console.error('Error fetching food details:', error));
   }, [id]);
@@ -27,7 +27,7 @@ const UpdateFood = () => {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:5000/foods/${id}`, food ,{withCredentials:true})
+      .put(`https://food-hazel-three.vercel.app/foods/${id}`, food ,{withCredentials:true})
       .then(() => {
         alert('Food updated successfully!');
         navigate('/manage-my-foods'); 

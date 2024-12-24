@@ -15,7 +15,7 @@ const MyFoodRequest = () => {
     queryFn: async () => {
       if (!user?.email) return [];
       const res = await fetch(
-        `http://localhost:5000/api/food-requests?email=${user.email}`,
+        `https://food-hazel-three.vercel.app/api/food-requests?email=${user.email}`,
         {
           credentials: "include",
         }

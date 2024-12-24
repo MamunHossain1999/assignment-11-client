@@ -14,7 +14,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/foods/${id}`,{withCredentials: true})
+      .get(`https://food-hazel-three.vercel.app/foods/${id}`,{withCredentials: true})
       .then((response) => {
         setFood(response.data); 
       })
@@ -46,11 +46,11 @@ const FoodDetails = () => {
 
 
     axios
-      .post("http://localhost:5000/foodData", requestData, {withCredentials: true}) 
+      .post("https://food-hazel-three.vercel.app/foodData", requestData, {withCredentials: true}) 
       .then(() => {
       
         axios
-          .put(`http://localhost:5000/foods/${food._id}`, {
+          .put(`https://food-hazel-three.vercel.app/foods/${food._id}`, {
             ...food,
             foodStatus: "requested", 
           },{withCredentials: true})

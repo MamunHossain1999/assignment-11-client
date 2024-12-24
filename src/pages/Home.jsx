@@ -15,7 +15,7 @@ const Home = () => {
   // Fetch foods from backend API
   useEffect(() => {
     axios
-      .get("http://localhost:5000/foods", {withCredentials: true})
+      .get("https://food-hazel-three.vercel.app/foods", {withCredentials: true})
       .then((response) => {
         setFoods(response.data);
         setLoading(false);

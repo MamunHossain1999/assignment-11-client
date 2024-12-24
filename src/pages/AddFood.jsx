@@ -35,7 +35,7 @@ const AddFood = () => {
     const dataToSubmit = { ...formData, ...donatorData }; 
 
     // Send data to the server (POST request)
-    axios.post('http://localhost:5000/foods', dataToSubmit)
+    axios.post('https://food-hazel-three.vercel.app/foods', dataToSubmit, {withCredentials: true})
       .then((response) => {
         alert('Food added successfully!');
         setFormData({
@@ -57,7 +57,7 @@ const AddFood = () => {
   return (
     <div className="w-full mx-auto p-8 shadow-lg bg-gradient-to-r from-teal-300 via-rose-200 to-indigo-300 rounded-lg">
       <Helmet>
-        <title>AddFood</title>
+        <title>AddFoog</title>
       </Helmet>
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add a Food</h2>
       <form onSubmit={handleSubmit}>

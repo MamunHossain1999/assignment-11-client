@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const { signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
@@ -30,7 +29,6 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    
     if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
       setPasswordError(
         "Password must contain at least one uppercase and one lowercase letter."
@@ -40,16 +38,9 @@ const Login = () => {
     setPasswordError("");
 
     try {
-      await signIn(email, password); 
-      const user = { email };
-
-      // Get JWT Token from Server
-      const { data } = await axios.post("http://localhost:5000/login", user);
-      console.log(data)
-      localStorage.setItem("login", data.token);
-
+      await signIn(email, password);
       toast.success("Login Successful!");
-      navigate(from || '/home'); 
+      navigate(from || "/home");
     } catch (err) {
       console.error(err);
       toast.error("Login Failed: " + err.message);
@@ -65,7 +56,7 @@ const Login = () => {
       return;
     }
     try {
-      await resetPassword(email); 
+      await resetPassword(email);
       toast.success("Password reset email sent successfully.");
     } catch (err) {
       console.error(err);

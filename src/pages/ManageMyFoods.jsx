@@ -12,7 +12,7 @@ const ManageMyFoods = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/my-foods?email=${user.email}`)
+        .get(`http://localhost:5000/my-foods?email=${user.email}`, {withCredentials: true})
         .then((response) => setFoods(response.data))
         .catch((error) => console.error('Error fetching foods:', error));
     }
@@ -23,7 +23,7 @@ const ManageMyFoods = () => {
     const confirm = window.confirm('Are you sure you want to delete this food?');
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/foods/${id}`)
+        .delete(`http://localhost:5000/foods/${id}`,{withCredentials: true})
         .then(() => {
           alert('Food deleted successfully!');
           setFoods(foods.filter((food) => food._id !== id)); 

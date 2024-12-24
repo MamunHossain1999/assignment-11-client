@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import ThemeController from "../themeControl/ThemeCortroller";
 
 const Navber = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const Navber = () => {
   };
 
   return (
-    <div className="navbar bg-gradient-to-r  from-blue-400 to-green-400 w-full mx-auto sticky top-0 z-50">
+    <div className="navbar bg-gradient-to-r dark:bg-slate-800  from-blue-400 to-green-400 w-full mx-auto sticky top-0 z-50">
       {/* Navbar Start */}
       <div className="navbar-start flex items-center">
         <div className="dropdown">
@@ -153,7 +154,11 @@ const Navber = () => {
 
       {/* Navbar End */}
       <div className="navbar-end gap-3">
+        
         <div className="flex items-center gap-4">
+          <div>
+            <ThemeController/>
+          </div>
           {/* User Avatar */}
           <div className="w-14 h-14">
             {user && user.photoURL ? (

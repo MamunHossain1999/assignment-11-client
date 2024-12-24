@@ -12,6 +12,7 @@ import ManageMyFoods from '../pages/ManageMyFoods';
 import MyFoodRequest from '../pages/MyFoodRequest';
 import FoodDetails from '../pages/FoodDetails';
 import UpdateFood from '../pages/UpdateFood';
+import ThemeController from '../themeControl/ThemeCortroller';
 
 
   const router = createBrowserRouter([
@@ -46,6 +47,10 @@ import UpdateFood from '../pages/UpdateFood';
       {
         path: '/my-food-request',
         element: <PrivateRoute><MyFoodRequest/></PrivateRoute>
+      },
+      {
+        path: '/darkLight',
+        element: <ThemeController/>
       },
       {
         path: '*',

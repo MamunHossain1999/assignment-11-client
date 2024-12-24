@@ -9,6 +9,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase.config";
+import axios from "axios";
+import { Await } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -34,6 +36,12 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true);
+    const { data } = await axios.post(
+      "http://localhost:5000/logout",
+      {},
+      { withCredentials: true }
+    );
+    console.log(data);
     return signOut(auth);
   };
 
@@ -47,8 +55,18 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      // console.log('state captured', currentUser?.email)
+      if (currentUser?.email) {
+        setUser(currentUser);
+        const user = { email: currentUser.email };
 
+        const { data } = axios.post(
+          "http://localhost:5000/login",
+          { email: currentUser?.email },
+          { withCredentials: true }
+        );
+      }
+      setUser(currentUser);
       setLoading(false);
     });
     return () => {

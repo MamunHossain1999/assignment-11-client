@@ -16,7 +16,7 @@ const AvailableFood = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/foods")
+      .get("http://localhost:5000/foods", {withCredentials: true})
       .then((response) => {
         const availableFoods = response.data.filter(
           (food) => food.foodStatus === "available"

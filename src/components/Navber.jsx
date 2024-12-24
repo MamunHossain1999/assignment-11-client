@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import ThemeController from "../themeControl/ThemeCortroller";
 import { Helmet } from "react-helmet";
+import companyLogo from "../assets/foodCompanyLogo.png";
 
 const Navber = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -104,12 +105,16 @@ const Navber = () => {
         </div>
 
         {/* Logo */}
-        <NavLink
-          to="/"
-          className="btn btn-ghost text-xl hidden lg:block text-white font-bold bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500 hover:from-pink-600 hover:via-yellow-600 hover:to-orange-600 rounded-lg px-6 py-2"
-        >
-          Food Sharing
-        </NavLink>
+        <div className="flex items-center gap-2">
+          <img
+            className="w-12 rounded-full"
+            src={companyLogo}
+            alt="Company Logo"
+          />
+          <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
+            Food Sharing
+          </p>
+        </div>
       </div>
 
       {/* Navbar Center */}
@@ -157,10 +162,9 @@ const Navber = () => {
 
       {/* Navbar End */}
       <div className="navbar-end gap-3">
-        
         <div className="flex items-center gap-4">
           <div>
-            <ThemeController/>
+            <ThemeController />
           </div>
           {/* User Avatar */}
           <div className="w-14 h-14">

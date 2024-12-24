@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const UpdateFood = () => {
   const { id } = useParams(); 
@@ -36,6 +37,9 @@ const UpdateFood = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <Helmet>
+        <title>UpdateFood</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4">Update Food</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

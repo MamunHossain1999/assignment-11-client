@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext); 
@@ -39,6 +40,9 @@ const ManageMyFoods = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <Helmet>
+        <title>ManageMyFoods</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6">Manage My Foods</h2>
       
       <div className="overflow-x-auto">

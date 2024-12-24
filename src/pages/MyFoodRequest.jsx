@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const MyFoodRequest = () => {
   const { user } = useContext(AuthContext);
@@ -40,6 +41,9 @@ const MyFoodRequest = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <Helmet>
+        <title>MyFoodRequest</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
       </h2>
 

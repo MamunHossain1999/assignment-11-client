@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const AddFood = () => {
   const { user } = useContext(AuthContext); 
@@ -55,6 +56,9 @@ const AddFood = () => {
 
   return (
     <div className="w-full mx-auto p-8 shadow-lg bg-gradient-to-r from-teal-300 via-rose-200 to-indigo-300 rounded-lg">
+      <Helmet>
+        <title>AddFood</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add a Food</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">

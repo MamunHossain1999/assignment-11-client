@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
     <div key={food.id} className="card bg-base-100 shadow-xl">
+      <Helmet>
+        <title>FoodCard</title>
+      </Helmet>
       <figure>
         <img
           src={food.foodImage}

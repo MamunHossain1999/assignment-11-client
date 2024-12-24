@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { signIn, signInWithGoogle, resetPassword } = useContext(AuthContext);
@@ -66,6 +67,9 @@ const Login = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+        <title>loginPage</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left"></div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Waypoint } from "react-waypoint";
 import FoodCard from "./FoodCard";
+import { Helmet } from "react-helmet";
 
 const AvailableFood = () => {
   const [foods, setFoods] = useState([]);
@@ -63,6 +64,9 @@ const AvailableFood = () => {
 
   return (
     <div className="w-full p-4">
+      <Helmet>
+        <title>AvailableFoods</title>
+      </Helmet>
       {/* Search and button section */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
         <input

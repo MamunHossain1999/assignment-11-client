@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const FoodDetails = () => {
   const { user } = useContext(AuthContext); 
@@ -76,6 +77,9 @@ const FoodDetails = () => {
 
   return (
     <div className="w-full mx-auto p-4 border my-4 justify-center items-center">
+      <Helmet>
+        <title>FoodDetails</title>
+      </Helmet>
       <img
         src={food.foodImage}
         alt={food.foodName}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import Carousel from "./Carousel";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -42,6 +43,9 @@ const Home = () => {
 
   return (
     <div className="w-full bg-gray-100 dark:bg-gray-900">
+      <Helmet>
+        <title>HomePage</title>
+      </Helmet>
       <div className="relative">
         <div className="carousel w-full">
           <Carousel />

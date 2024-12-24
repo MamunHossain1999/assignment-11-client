@@ -107,7 +107,7 @@ const Navber = () => {
             src={companyLogo}
             alt="Company Logo"
           />
-          <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
+          <p className="text-4xl text-transparent hidden md:!block bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
             Food Sharing
           </p>
         </div>

@@ -35,14 +35,14 @@ const Home = () => {
   };
 
   // Show only 6 foods at first
-  const displayedFoods = showAll ? foods : foods.slice(0, 6);
+  const displayedFoods = showAll ? foods : foods.slice(0, 8);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="w-full bg-gray-100 dark:bg-gray-900">
+    <div className="w-11/12 mx-auto bg-gray-100 dark:bg-gray-900">
       <Helmet>
         <title>HomePage</title>
       </Helmet>
@@ -98,28 +98,6 @@ const Home = () => {
             </button>
           </div>
         )}
-      </div>
-
-      {/* Extra Section 1: Why Choose Us? */}
-      <div className="p-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg mb-6 shadow-lg text-white">
-        <h3 className="text-2xl sm:text-3xl font-semibold text-white text-center">
-          Why Choose Us?
-        </h3>
-        <p className="mt-2 text-sm sm:text-base lg:text-lg text-center">
-          We provide fresh and quality food. Your donations can make a big
-          difference.
-        </p>
-      </div>
-
-      {/* Extra Section 2: How It Works */}
-      <div className="p-6 bg-gradient-to-r from-green-400 via-blue-500 to-indigo-500 rounded-lg mb-6 shadow-lg text-white">
-        <h3 className="text-2xl sm:text-3xl font-semibold text-white text-center">
-          How It Works
-        </h3>
-        <p className="mt-2 text-sm sm:text-base lg:text-lg text-center">
-          Just select the food items you wish to donate, and we will deliver
-          them to the right place.
-        </p>
       </div>
     </div>
   );

@@ -22,8 +22,8 @@ const Navber = () => {
   };
 
   return (
-    <div className="w-full mx-auto  bg-gray-400 dark:bg-slate-800">
-      <div className="navbar w-11/12 mx-auto sticky top-0 z-50 text-white">
+    <div className="w-full mx-auto  bg-gray-400 dark:bg-slate-800 sticky top-0 z-50">
+      <div className="navbar w-11/12 mx-auto  text-white">
         <div className="navbar-start flex items-center ">
           <div className="dropdown">
             <button
@@ -186,7 +186,7 @@ const Navber = () => {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="btn bg-red-500 border-none hover:bg-red-400 text-black dark:bg-[rgb(233,30,99)] dark:hover:bg-[rgb(250,82,82)]"
+                className="btn bg-red-500 border-none w-16 h-8 hover:bg-red-400 text-black dark:bg-[rgb(233,30,99)] dark:hover:bg-[rgb(250,82,82)]"
               >
                 Logout
               </button>

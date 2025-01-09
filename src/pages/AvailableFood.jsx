@@ -63,12 +63,12 @@ const AvailableFood = () => {
   }
 
   return (
-    <div className="w-full p-4">
+    <div className="w-11/12 mx-auto py-8">
       <Helmet>
         <title>AvailableFoods</title>
       </Helmet>
       {/* Search and button section */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <input
           type="text"
           placeholder="Search"
@@ -88,10 +88,10 @@ const AvailableFood = () => {
 
       {/* Food grid layout */}
       <div
-        className={`grid gap-4 ${
+        className={`grid gap-4 pt-5 ${
           isThreeColumn
-            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-            : "grid-cols-1 sm:grid-cols-2"
+            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+            : "grid-cols-1 sm:grid-cols-3"
         }`}
       >
         {sortedFoods.slice(0, visibleIndex).map((food) => (

@@ -20,22 +20,15 @@ const FoodCard = ({ food }) => {
           <strong>Food Quantity:</strong> {food.foodQuantity}
         </p>
         <p>
-          <strong>Pickup Location:</strong> {food.pickupLocation}
-        </p>
-        <p>
           <strong>Expire Date:</strong>{" "}
           {new Date(food.expireDate).toLocaleString()}
         </p>
-        <p>
-          <strong>Additional Notes:</strong> {food.additionalNotes}
-        </p>
-
         <p className="mt-2">
           <strong>Status:</strong> {food.foodStatus || "available"}
         </p>
-        <div className="card-actions justify-end">
+        <div className=" ">
           <Link to={`/food/${food._id}`}>
-            <button className="btn btn-primary">View Details</button>
+            <button className="btn btn-primary  px-10">View Details</button>
           </Link>
         </div>
       </div>

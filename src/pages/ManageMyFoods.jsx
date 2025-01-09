@@ -43,7 +43,7 @@ const ManageMyFoods = () => {
       <Helmet>
         <title>ManageMyFoods</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center mb-6">Manage My Foods</h2>
+      <h2 className="text-3xl font-bold text-purple-500 text-center mb-6">Manage My Foods</h2>
       
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border-collapse border border-gray-300 shadow-lg">

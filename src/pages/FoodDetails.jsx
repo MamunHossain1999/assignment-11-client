@@ -76,7 +76,7 @@ const FoodDetails = () => {
   }
 
   return (
-    <div className="w-full mx-auto p-4 border my-4 justify-center items-center">
+    <div className="w-full mx-auto p-4 my-4 justify-center items-center">
       <Helmet>
         <title>FoodDetails</title>
       </Helmet>

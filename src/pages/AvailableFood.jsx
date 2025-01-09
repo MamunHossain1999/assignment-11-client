@@ -97,7 +97,7 @@ const AvailableFood = () => {
         {sortedFoods.slice(0, visibleIndex).map((food) => (
           <div
             key={food.id}
-            className="transform hover:scale-105 transition-all duration-300 ease-in-out hover:bg-gray-200 p-4 rounded-lg shadow-lg animate__animated animate__fadeIn"
+            className="transform hover:scale-105 transition-all duration-300 ease-in-out hover:bg-gray-200  animate__animated animate__fadeIn"
           >
             <FoodCard food={food} />
             <Waypoint onEnter={loadMore} />

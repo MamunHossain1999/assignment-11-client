@@ -55,14 +55,14 @@ const AddFood = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-8 shadow-lg bg-gradient-to-r from-teal-300 via-rose-200 to-indigo-300 rounded-lg">
+    <div className="w-10/12 mx-auto p-8">
       <Helmet>
         <title>AddFoog</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add a Food</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="text-3xl font-bold text-white mb-6 text-center">Add a Food</h2>
+      <form onSubmit={handleSubmit} >
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Food Name</label>
+          <label className="block mb-2 text-lg font-medium text-white">Food Name</label>
           <input 
             type="text" 
             name="foodName" 
@@ -73,7 +73,7 @@ const AddFood = () => {
           />
         </div>
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Food Image URL</label>
+          <label className="block mb-2 text-lg font-medium text-white">Food Image URL</label>
           <input 
             type="text" 
             name="foodImage" 
@@ -84,7 +84,7 @@ const AddFood = () => {
           />
         </div>
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Food Quantity</label>
+          <label className="block mb-2 text-lg font-medium text-white">Food Quantity</label>
           <input 
             type="text" 
             name="foodQuantity" 
@@ -95,7 +95,7 @@ const AddFood = () => {
           />
         </div>
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Pickup Location</label>
+          <label className="block mb-2 text-lg font-medium text-white">Pickup Location</label>
           <input 
             type="text" 
             name="pickupLocation" 
@@ -106,7 +106,7 @@ const AddFood = () => {
           />
         </div>
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Expire Date/Time</label>
+          <label className="block mb-2 text-lg font-medium text-white">Expire Date/Time</label>
           <input 
             type="datetime-local" 
             name="expireDate" 
@@ -117,7 +117,7 @@ const AddFood = () => {
           />
         </div>
         <div className="mb-5">
-          <label className="block mb-2 text-lg font-medium text-gray-700">Additional Notes</label>
+          <label className="block mb-2 text-lg font-medium text-white">Additional Notes</label>
           <textarea 
             name="additionalNotes" 
             value={formData.additionalNotes} 
@@ -127,7 +127,7 @@ const AddFood = () => {
         </div>
         <button 
           type="submit" 
-          className="btn btn-primary w-full p-3 rounded-md bg-teal-500 text-white font-semibold hover:bg-teal-600 transition duration-300"
+          className="btn btn-primary w-full p-3 rounded-md transition duration-300"
         >
           Add Food
         </button>

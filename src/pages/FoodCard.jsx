@@ -7,13 +7,14 @@ const FoodCard = ({ food }) => {
       <Helmet>
         <title>FoodCard</title>
       </Helmet>
-      <figure>
+      <figure className="overflow-hidden rounded-lg">
         <img
           src={food.foodImage}
           alt={food.foodName}
-          className="w-full h-64 object-cover"
+          className="w-full h-64 object-cover transition-transform duration-300 transform hover:scale-105"
         />
       </figure>
+
       <div className="card-body">
         <h2 className="card-title">{food.foodName}</h2>
         <p>
@@ -26,9 +27,11 @@ const FoodCard = ({ food }) => {
         <p className="mt-2">
           <strong>Status:</strong> {food.foodStatus || "available"}
         </p>
-        <div className=" ">
+        <div className="">
           <Link to={`/food/${food._id}`}>
-            <button className="btn btn-primary  px-10">View Details</button>
+            <button className="btn btn-primary px-10 transition-all duration-300 transform hover:scale-105 hover:bg-blue-600">
+              View Details
+            </button>
           </Link>
         </div>
       </div>

@@ -1,9 +1,13 @@
+import logo from '../assets/foodCompanyLogo.png'
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 text-white p-10">
+    <footer className="bg-gray-400 text-white p-10  dark:bg-slate-800 ">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         <nav>
+          <div className='flex items-center gap-3'>
+            <img className='w-8 h-8 mb-3 rounded-full' src={logo}  alt="company logo" />
           <h6 className="footer-title text-lg font-semibold mb-4">Services</h6>
+          </div>
           <a className="link link-hover text-gray-100 hover:text-white mb-2 block">Branding</a>
           <a className="link link-hover text-gray-100 hover:text-white mb-2 block">Design</a>
           <a className="link link-hover text-gray-100 hover:text-white mb-2 block">Marketing</a>

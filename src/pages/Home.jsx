@@ -42,7 +42,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900">
+    <div className=" dark:bg-gray-900">
       <Helmet>
         <title>HomePage</title>
       </Helmet>
@@ -53,7 +53,7 @@ const Home = () => {
       </div>
 
       {/* Featured Foods Section */}
-      <div className="w-11/12 mx-auto p-6 bg-white shadow-lg rounded-lg dark:bg-gray-900 mt-6">
+      <div className="w-11/12 mx-auto p-6 bg-white shadow-lg rounded-lg dark:bg-gray-900 ">
         <h2 className="text-3xl font-bold mb-6 text-center  text-purple-600">
           Featured Foods
         </h2>
@@ -75,7 +75,7 @@ const Home = () => {
                   {food.foodName}
                 </h2>
                 <p className="text-gray-600">{food.additionalNotes}</p>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-center">
                   <button
                     className="btn btn-primary text-white hover:bg-blue-700"
                     onClick={() => handleViewDetails(food._id)}

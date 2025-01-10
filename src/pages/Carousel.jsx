@@ -16,7 +16,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const Carousel = () => {
   return (
-    <div className="w-full mx-auto h-[700px]">
+    <div className="w-full mx-auto md:h-[700px]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation

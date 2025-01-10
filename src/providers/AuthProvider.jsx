@@ -54,25 +54,31 @@ const AuthProvider = ({ children }) => {
 
   // onAuthStateChange
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log('state captured', currentUser?.email)
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
-        const user = { email: currentUser.email };
-
-        const { data } = axios.post(
-          "https://food-hazel-three.vercel.app/login",
-          { email: currentUser?.email },
-          { withCredentials: true }
-        );
+  
+        try {
+          const response = await axios.post(
+            "https://food-hazel-three.vercel.app/login",
+            { email: currentUser?.email },
+            { withCredentials: true }
+          );
+          console.log("Server Response:", response.data);
+        } catch (error) {
+          console.error("Error in axios request:", error);
+        }
+      } else {
+        setUser(null);
       }
-      setUser(currentUser);
       setLoading(false);
     });
+  
     return () => {
       unsubscribe();
     };
   }, []);
+  
 
   const authInfo = {
     user,

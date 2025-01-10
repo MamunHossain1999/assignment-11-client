@@ -29,7 +29,7 @@ const Navber = () => {
             <button
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden text-white"
+              className="btn btn-ghost lg:hidden text-white  bg-gray-400"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
@@ -49,7 +49,7 @@ const Navber = () => {
             </button>
             <ul
               tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-[1] ${
+              className={`menu menu-sm dropdown-content mt-3 w-52 p-2 shadow  bg-gray-500 rounded-box z-[1] ${
                 isMenuOpen ? "block" : "hidden"
               }`}
             >

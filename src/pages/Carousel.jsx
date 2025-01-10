@@ -16,14 +16,14 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const Carousel = () => {
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto h-[700px]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 2000 }}
         loop
-        className="h-96 md:h-[500px] lg:h-[600px] object-fill"
+        className="h-96 md:h-[500px] lg:h-[700px] object-cover"
       >
         <SwiperSlide>
           <div className="relative h-full">

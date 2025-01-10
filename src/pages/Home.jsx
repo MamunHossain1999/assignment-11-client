@@ -54,7 +54,7 @@ const Home = () => {
 
       {/* Featured Foods Section */}
       <div className="w-11/12 mx-auto p-6 bg-white shadow-lg rounded-lg dark:bg-gray-900 mt-6">
-        <h2 className="text-3xl font-bold mb-6 text-center  text-gray-800">
+        <h2 className="text-3xl font-bold mb-6 text-center  text-purple-600">
           Featured Foods
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

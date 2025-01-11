@@ -48,39 +48,36 @@ const MyFoodRequest = () => {
         My Food Requests
       </h2>
 
-      {users?.length === 0 ? (
-        <p className="text-center text-gray-500">No requests found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border-collapse border border-gray-300 shadow-lg">
-            <thead className="bg-blue-600 text-white">
-              <tr>
-                <th className="border px-4 py-2 text-left">Donor Name</th>
-                <th className="border px-4 py-2 text-left">Pickup Location</th>
-                <th className="border px-4 py-2 text-left">Expire Date</th>
-                <th className="border px-4 py-2 text-left">Request Date</th>
+      {/* Desktop View */}
+      <div className="overflow-x-auto hidden lg:block">
+        <table className="min-w-full bg-white border-collapse border border-gray-300 shadow-lg">
+          <thead className="bg-blue-600 text-white">
+            <tr>
+              <th className="border px-4 py-2 text-left">Donor Name</th>
+              <th className="border px-4 py-2 text-left">Pickup Location</th>
+              <th className="border px-4 py-2 text-left">Expire Date</th>
+              <th className="border px-4 py-2 text-left">Request Date</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-700">
+            {users?.map((request) => (
+              <tr
+                key={request._id}
+                className="hover:bg-gray-100 transition-all duration-200"
+              >
+                <td className="border px-4 py-2">{request.donatorName}</td>
+                <td className="border px-4 py-2">{request.pickupLocation}</td>
+                <td className="border px-4 py-2">{request.expireDate}</td>
+                <td className="border px-4 py-2">
+                  {new Date(request.requestDate).toLocaleString()}
+                </td>
               </tr>
-            </thead>
-            <tbody className="text-gray-700">
-              {users?.map((request) => (
-                <tr
-                  key={request._id}
-                  className="hover:bg-gray-100 transition-all duration-200"
-                >
-                  <td className="border px-4 py-2">{request.donatorName}</td>
-                  <td className="border px-4 py-2">{request.pickupLocation}</td>
-                  <td className="border px-4 py-2">{request.expireDate}</td>
-                  <td className="border px-4 py-2">
-                    {new Date(request.requestDate).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Mobile Responsive Section */}
+      {/* Mobile View */}
       <div className="lg:hidden mt-6">
         <h3 className="text-xl font-semibold text-center text-blue-600 mb-4">Mobile View</h3>
         {users?.map((request) => (

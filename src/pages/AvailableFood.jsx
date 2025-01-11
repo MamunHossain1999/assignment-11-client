@@ -73,30 +73,37 @@ const AvailableFood = () => {
       </Helmet>
       
       {/* Search and button section */}
+      
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-full sm:w-1/3 p-3"
-          value={search}
-          onChange={handleSearch}
-        />
-        <div className="flex gap-2 w-full sm:w-auto">
-          <button className="btn btn-primary w-full sm:w-auto" onClick={handleSort}>
-            Sort by Expiry Date
-          </button>
-          <button className="btn btn-secondary w-full sm:w-auto" onClick={toggleLayout}>
-            {isThreeColumn ? "Two Column" : "Three Column"}
-          </button>
-        </div>
-      </div>
+  {/* Search Input */}
+  <input
+    type="text"
+    placeholder="Search"
+    className="input input-bordered w-full sm:w-1/3 p-3"
+    value={search}
+    onChange={handleSearch}
+  />
+
+  {/* Button Group */}
+  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+    {/* Sort Button */}
+    <button className="btn btn-primary w-full sm:w-auto" onClick={handleSort}>
+      Sort by Expiry Date
+    </button>
+
+    {/* Layout Toggle Button */}
+    <button className="btn btn-secondary w-full sm:w-auto" onClick={toggleLayout}>
+      {isThreeColumn ? "Three Column" : "Four Column"}
+    </button>
+  </div>
+</div>
 
       {/* Food grid layout */}
       <div
         className={`grid gap-4 pt-5 ${
           isThreeColumn
             ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
+            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         }`}
       >
         {sortedFoods.slice(0, visibleIndex).map((food) => (

@@ -57,7 +57,8 @@ const ManageMyFoods = () => {
       </Helmet>
       <h2 className="text-3xl font-bold text-white text-center py-6">Manage My Foods</h2>
       
-      <div className="overflow-x-auto">
+      {/* Desktop View */}
+      <div className="overflow-x-auto hidden lg:block">
         <table className="min-w-full bg-white border-collapse border border-gray-300 shadow-lg">
           <thead className="bg-gray-800 text-white">
             <tr>
@@ -91,14 +92,14 @@ const ManageMyFoods = () => {
         </table>
       </div>
 
-      {/* Mobile Responsiveness: Stack table data on smaller screens */}
+      {/* Mobile View */}
       <div className="lg:hidden mt-6">
         <h3 className="text-xl font-bold text-purple-500 text-center py-4">Mobile View</h3>
         {foods.map((food) => (
           <div key={food._id} className="border p-4 mb-4 shadow-lg rounded-lg bg-white">
             <h4 className="font-semibold text-lg text-gray-800">{food.foodName}</h4>
             <p className="text-gray-600">Quantity: {food.foodQuantity}</p>
-            <div className="mt-4 flex justify-between">
+            <div className="mt-4 flex justify-between gap-2">
               <button
                 className="btn btn-warning btn-sm text-yellow-600 hover:bg-yellow-300"
                 onClick={() => handleUpdate(food._id)}

@@ -34,7 +34,7 @@ const Home = () => {
     }
   };
 
-  // Show only 6 foods at first
+  // Show only 8 foods at first
   const displayedFoods = showAll ? foods : foods.slice(0, 8);
 
   if (loading) {
@@ -42,7 +42,7 @@ const Home = () => {
   }
 
   return (
-    <div className=" dark:bg-gray-900">
+    <div className="dark:bg-gray-900">
       <Helmet>
         <title>HomePage</title>
       </Helmet>
@@ -53,8 +53,8 @@ const Home = () => {
       </div>
 
       {/* Featured Foods Section */}
-      <div className="w-11/12 mx-auto p-6 bg-white shadow-lg rounded-lg dark:bg-gray-900 ">
-        <h2 className="text-3xl font-bold mb-6 text-center  text-purple-600">
+      <div className="w-11/12 mx-auto p-6  shadow-lg rounded-lg dark:bg-gray-900">
+        <h2 className="text-3xl font-bold mb-6 text-center text-purple-600">
           Featured Foods
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -87,6 +87,7 @@ const Home = () => {
             </div>
           ))}
         </div>
+
         {/* Show All Button */}
         {!showAll && (
           <div className="text-center mt-4">

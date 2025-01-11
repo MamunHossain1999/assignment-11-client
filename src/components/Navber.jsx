@@ -22,19 +22,23 @@ const Navber = () => {
   };
 
   return (
-    <div className="w-full mx-auto  bg-gray-400 dark:bg-slate-800 sticky top-0 z-50">
-      <div className="navbar w-11/12 mx-auto  text-white">
-        <div className="navbar-start flex items-center ">
+    <div className="w-full bg-gray-400 dark:bg-slate-800 sticky top-0 z-50 bg-opacity-40 backdrop-blur-md">
+      <div className="navbar w-11/12 mx-auto text-white p-4">
+        
+        {/* Navbar Start */}
+        <div className="navbar-start flex items-center">
+          
+          {/* Dropdown for Mobile */}
           <div className="dropdown">
             <button
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden text-white  bg-gray-400"
+              className="btn btn-ghost lg:hidden text-white bg-gray-400"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -48,8 +52,7 @@ const Navber = () => {
               </svg>
             </button>
             <ul
-              tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 w-52 p-2 shadow  bg-gray-500 rounded-box z-[1] ${
+              className={`absolute left-0 top-14 w-52 p-2 shadow-lg bg-gray-500 rounded-box z-10 ${
                 isMenuOpen ? "block" : "hidden"
               }`}
             >
@@ -104,14 +107,14 @@ const Navber = () => {
             </ul>
           </div>
 
-          {/* Logo */}
+          {/* Logo Section */}
           <div className="flex items-center gap-2">
             <img
-              className="w-12 rounded-full hidden md:!block"
+              className="w-12 rounded-full hidden md:block"
               src={companyLogo}
               alt="Company Logo"
             />
-            <p className="text-4xl text-transparent hidden md:!block bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
+            <p className="text-3xl text-transparent hidden md:block bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
               Food Sharing
             </p>
           </div>
@@ -161,44 +164,33 @@ const Navber = () => {
         </div>
 
         {/* Navbar End */}
-        <div className="navbar-end gap-3">
-          <div className="flex items-center gap-4">
-            <div>
-              <ThemeController />
-            </div>
-            {/* User Avatar */}
-            <div className="w-12 h-12">
-              {user ? (
-                <img
-                  referrerPolicy="no-referrer"
-                  src={user.photoURL}
-                  alt="User Avatar"
-                  className="rounded-full"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-full border bg-gray-500 flex items-center justify-center">
-                  <span className="text-white font-bold">U</span>
-                </div>
-              )}
-            </div>
+        <div className="navbar-end gap-4">
+          <ThemeController />
 
-            {/* Login/Logout Button */}
-            {user ? (
+          {/* User Avatar */}
+          {user ? (
+            <div className="flex items-center gap-4">
+              <img
+                referrerPolicy="no-referrer"
+                src={user.photoURL}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full"
+              />
               <button
                 onClick={handleLogout}
-                className="btn bg-red-500 border-none w-16 h-8 hover:bg-red-400 text-black dark:bg-[rgb(233,30,99)] dark:hover:bg-[rgb(250,82,82)]"
+                className="btn bg-red-500 border-none w-16 h-8 hover:bg-red-400 text-black dark:bg-pink-500 dark:hover:bg-pink-400"
               >
                 Logout
               </button>
-            ) : (
-              <NavLink
-                to="/login"
-                className="btn btn-primary hover:bg-purple-600 border-none text-[rgb(255,255,255)]"
-              >
-                Login
-              </NavLink>
-            )}
-          </div>
+            </div>
+          ) : (
+            <NavLink
+              to="/login"
+              className="btn btn-primary hover:bg-purple-600 border-none text-white"
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

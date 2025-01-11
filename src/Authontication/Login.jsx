@@ -12,7 +12,7 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state?.from || "/";
 
-  // Google SignIn
+  // Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
@@ -24,7 +24,7 @@ const Login = () => {
     }
   };
 
-  // Email & Password SignIn
+  // Email & Password Sign-In
   const handleSignIn = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -68,13 +68,13 @@ const Login = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <Helmet>
-        <title>loginPage</title>
+        <title>Login Page</title>
       </Helmet>
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse gap-6 p-4 sm:p-6">
         <div className="text-center lg:text-left"></div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm mx-auto p-6 shadow-2xl">
           <form onSubmit={handleSignIn} className="card-body">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold">Login now!</h1>
 
             {/* Email Input */}
             <div className="form-control">
@@ -85,7 +85,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 placeholder="email"
-                className="input input-bordered"
+                className="input input-bordered p-4"
                 required
               />
             </div>
@@ -100,7 +100,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="password"
-                  className="input input-bordered w-full pr-10"
+                  className="input input-bordered p-4 w-full pr-10"
                   required
                 />
                 <button
@@ -127,7 +127,7 @@ const Login = () => {
 
             {/* Login Button */}
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary btn-wide">Login</button>
             </div>
 
             {/* Google Sign-In */}
@@ -135,7 +135,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="btn btn-secondary"
+                className="btn btn-secondary btn-wide"
               >
                 Google Login
               </button>

@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext); 
+  const { createUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // Handle Registration
@@ -35,7 +35,7 @@ const Register = () => {
       // Create User
       await createUser(email, password, name, photoURL);
       toast.success("Registration Successful!");
-      navigate("/login"); 
+      navigate("/login");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -45,13 +45,13 @@ const Register = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <Helmet>
-        <title>registerPage</title>
+        <title>Register Page</title>
       </Helmet>
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse gap-6 p-4 sm:p-6">
         <div className="text-center lg:text-left"></div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm mx-auto p-6 shadow-2xl">
           <form onSubmit={handleRegister} className="card-body">
-            <h1 className="text-5xl font-bold">Register now!</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold">Register now!</h1>
 
             {/* Name Field */}
             <div className="form-control">
@@ -62,7 +62,7 @@ const Register = () => {
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                className="input input-bordered"
+                className="input input-bordered p-4"
                 required
               />
             </div>
@@ -76,7 +76,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                className="input input-bordered"
+                className="input input-bordered p-4"
                 required
               />
             </div>
@@ -90,7 +90,7 @@ const Register = () => {
                 type="text"
                 name="photoURL"
                 placeholder="Photo URL"
-                className="input input-bordered"
+                className="input input-bordered p-4"
               />
             </div>
 
@@ -101,16 +101,16 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"} 
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Your Password"
-                  className="input input-bordered w-full"
+                  className="input input-bordered p-4 w-full"
                   required
                 />
                 <button
                   type="button"
                   className="absolute inset-y-0 right-2 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)} 
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -120,7 +120,7 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Register</button>
+              <button className="btn btn-primary btn-wide">Register</button>
             </div>
 
             {/* Link to Login */}

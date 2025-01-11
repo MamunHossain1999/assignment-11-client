@@ -17,7 +17,7 @@ const AvailableFood = () => {
 
   useEffect(() => {
     axios
-      .get("https://food-hazel-three.vercel.app/foods", {withCredentials: true})
+      .get("https://food-hazel-three.vercel.app/foods", { withCredentials: true })
       .then((response) => {
         const availableFoods = response.data.filter(
           (food) => food.foodStatus === "available"
@@ -59,29 +59,34 @@ const AvailableFood = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
     <div className="w-11/12 mx-auto py-8">
       <Helmet>
-        <title>AvailableFoods</title>
+        <title>Available Foods</title>
       </Helmet>
+      
       {/* Search and button section */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
         <input
           type="text"
           placeholder="Search"
-          className="input input-bordered w-full sm:w-1/3"
+          className="input input-bordered w-full sm:w-1/3 p-3"
           value={search}
           onChange={handleSearch}
         />
-        <div className="flex gap-2 mt-4 sm:mt-0">
-          <button className="btn btn-primary" onClick={handleSort}>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <button className="btn btn-primary w-full sm:w-auto" onClick={handleSort}>
             Sort by Expiry Date
           </button>
-          <button className="btn btn-secondary" onClick={toggleLayout}>
-            Change Layout
+          <button className="btn btn-secondary w-full sm:w-auto" onClick={toggleLayout}>
+            {isThreeColumn ? "Two Column" : "Three Column"}
           </button>
         </div>
       </div>
@@ -90,20 +95,22 @@ const AvailableFood = () => {
       <div
         className={`grid gap-4 pt-5 ${
           isThreeColumn
-            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
-            : "grid-cols-1 sm:grid-cols-3"
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
         }`}
       >
         {sortedFoods.slice(0, visibleIndex).map((food) => (
           <div
             key={food.id}
-            className="transform hover:scale-105 transition-all duration-300 ease-in-out hover:bg-gray-200  animate__animated animate__fadeIn"
+            className="transform hover:scale-105 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-slate-700 animate__animated animate__fadeIn"
           >
             <FoodCard food={food} />
-            <Waypoint onEnter={loadMore} />
           </div>
         ))}
       </div>
+
+      {/* Waypoint for infinite scrolling */}
+      {visibleIndex < sortedFoods.length && <Waypoint onEnter={loadMore} />}
     </div>
   );
 };

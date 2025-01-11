@@ -40,11 +40,12 @@ const MyFoodRequest = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto p-4">
       <Helmet>
         <title>MyFoodRequest</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
+      <h2 className="text-3xl font-bold text-center text-white mb-6">
+        My Food Requests
       </h2>
 
       {users?.length === 0 ? (
@@ -78,6 +79,19 @@ const MyFoodRequest = () => {
           </table>
         </div>
       )}
+
+      {/* Mobile Responsive Section */}
+      <div className="lg:hidden mt-6">
+        <h3 className="text-xl font-semibold text-center text-blue-600 mb-4">Mobile View</h3>
+        {users?.map((request) => (
+          <div key={request._id} className="border p-4 mb-4 shadow-lg rounded-lg bg-white">
+            <h4 className="font-semibold text-lg text-gray-800">{request.donatorName}</h4>
+            <p className="text-gray-600">Pickup Location: {request.pickupLocation}</p>
+            <p className="text-gray-600">Expire Date: {request.expireDate}</p>
+            <p className="text-gray-600">Request Date: {new Date(request.requestDate).toLocaleString()}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

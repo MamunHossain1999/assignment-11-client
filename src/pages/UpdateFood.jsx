@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet';
 
 const UpdateFood = () => {
@@ -13,7 +14,7 @@ const UpdateFood = () => {
 
   useEffect(() => {
     axios
-      .get(`https://food-hazel-three.vercel.app/foods/${id}` ,{withCredentials: true})
+      .get(`https://food-hazel-three.vercel.app/foods/${id}`, { withCredentials: true })
       .then((response) => setFood(response.data))
       .catch((error) => console.error('Error fetching food details:', error));
   }, [id]);
@@ -27,12 +28,26 @@ const UpdateFood = () => {
     e.preventDefault();
 
     axios
-      .put(`https://food-hazel-three.vercel.app/foods/${id}`, food ,{withCredentials:true})
+      .put(`https://food-hazel-three.vercel.app/foods/${id}`, food, { withCredentials: true })
       .then(() => {
-        alert('Food updated successfully!');
-        navigate('/manage-my-foods'); 
+        Swal.fire({
+          title: 'Success!',
+          text: 'Food updated successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          navigate('/manage-my-foods'); 
+        });
       })
-      .catch((error) => console.error('Error updating food:', error));
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to update food. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        console.error('Error updating food:', error);
+      });
   };
 
   return (
@@ -70,7 +85,10 @@ const UpdateFood = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-all duration-200"
+        >
           Update
         </button>
       </form>

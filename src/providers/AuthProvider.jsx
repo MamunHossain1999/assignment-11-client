@@ -37,9 +37,9 @@ const AuthProvider = ({ children }) => {
   const logOut = async () => {
     setLoading(true);
     const { data } = await axios.post(
-      "https://food-hazel-three.vercel.app/logout",
+      "http://localhost:5000/logout",
       {},
-      { withCredentials: true }
+      // { withCredentials: true }
     );
     console.log(data);
     return signOut(auth);
@@ -60,9 +60,9 @@ const AuthProvider = ({ children }) => {
   
         try {
           const response = await axios.post(
-            "https://food-hazel-three.vercel.app/login",
+            "http://localhost:5000//login",
             { email: currentUser?.email },
-            { withCredentials: true }
+            // { withCredentials: true }
           );
           console.log("Server Response:", response.data);
         } catch (error) {

@@ -2,7 +2,7 @@ import logo from '../assets/foodCompanyLogo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 text-white p-4 sm:p-10 dark:bg-slate-800">
+    <footer className="bg-gray-400 text-white p-4 sm:p-10">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10">
         
         {/* Services Section */}
@@ -38,16 +38,16 @@ const Footer = () => {
         <form>
           <h6 className="footer-title text-lg font-semibold mb-4">Newsletter</h6>
           <fieldset className="form-control w-full">
-            <label className="label text-gray-200">
-              <span className="label-text">Enter your email address</span>
+            <label className="label text-">
+              <span className="label-text text-white text-base">Enter your email address</span>
             </label>
             <div className="flex flex-wrap gap-2">
               <input
                 type="email"
                 placeholder="username@site.com"
-                className="input input-bordered w-full sm:flex-1 p-2"
+                className="input text-white w-full bg-primary sm:flex-1 p-2"
               />
-              <button className="btn btn-primary w-full sm:w-auto px-6">Subscribe</button>
+              <button className="btn bg-orange-300 text-white border-none w-full sm:w-auto px-6">Subscribe</button>
             </div>
           </fieldset>
         </form>
@@ -55,7 +55,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright Section */}
-      <div className="mt-8 text-center text-sm text-gray-100">
+      <div className="mt-8 text-center text-base text-white">
         <p>&copy; 2024 Your Company. All rights reserved.</p>
       </div>
     </footer>

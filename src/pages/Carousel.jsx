@@ -21,7 +21,7 @@ const Carousel = () => {
         modules={[Navigation, Pagination, Autoplay]}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 2000 }}
+        autoplay={{ delay: 4000 }}
         loop
         className="h-96 md:h-[500px] lg:h-[700px] object-cover"
       >

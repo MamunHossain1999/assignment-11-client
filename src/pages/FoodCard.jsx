@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
-    <div key={food.id} className="card bg-base-100 shadow-xl">
+    <div key={food.id} className="card bg-base-100 ">
       <Helmet>
         <title>FoodCard</title>
       </Helmet>

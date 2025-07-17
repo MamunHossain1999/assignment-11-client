@@ -2,7 +2,7 @@ import logo from '../assets/foodCompanyLogo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 text-white p-4 sm:p-10">
+    <footer className="bg-green-700 text-white p-4 sm:p-10">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10">
         
         {/* Services Section */}
@@ -45,7 +45,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="username@site.com"
-                className="input text-white w-full bg-primary sm:flex-1 p-2"
+                className="input text-white w-full bg-amber-200 sm:flex-1 p-2"
               />
               <button className="btn bg-orange-300 hover:bg-orange-400 text-white border-none w-full sm:w-auto px-6">Subscribe</button>
             </div>

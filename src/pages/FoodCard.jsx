@@ -3,20 +3,23 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
-    <div key={food.id} className="card bg-base-100 ">
+    <div className="card bg-base-100 shadow-md rounded-lg overflow-hidden">
       <Helmet>
         <title>FoodCard</title>
       </Helmet>
-      <figure className="overflow-hidden rounded-lg">
+
+      {/* Image Section */}
+      <figure className="h-64 overflow-hidden">
         <img
           src={food.foodImage}
           alt={food.foodName}
-          className="w-full h-64 object-cover transition-transform duration-300 transform hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 transform hover:scale-105"
         />
       </figure>
 
-      <div className="card-body">
-        <h2 className="card-title">{food.foodName}</h2>
+      {/* Content Section */}
+      <div className="p-4 bg-gray-100 text-black space-y-2">
+        <h2 className="text-lg font-bold">{food.foodName}</h2>
         <p>
           <strong>Food Quantity:</strong> {food.foodQuantity}
         </p>
@@ -24,12 +27,13 @@ const FoodCard = ({ food }) => {
           <strong>Expire Date:</strong>{" "}
           {new Date(food.expireDate).toLocaleString()}
         </p>
-        <p className="mt-2">
+        <p>
           <strong>Status:</strong> {food.foodStatus || "available"}
         </p>
-        <div className="">
+
+        <div className="pt-2">
           <Link to={`/food/${food._id}`}>
-            <button className="btn btn-primary px-10 transition-all duration-300 transform hover:scale-105 hover:bg-blue-600">
+            <button className="btn bg-orange-300 border-none text-white hover:bg-orange-400 w-full">
               View Details
             </button>
           </Link>

@@ -19,20 +19,18 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const password = form.password.value;
 
-    // Validation
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const isValidLength = password.length >= 6;
 
     if (!hasUppercase || !hasLowercase || !isValidLength) {
       setError(
-        "Password must have at least one uppercase, one lowercase letter, and be at least 6 characters long."
+        "Password must contain at least 1 uppercase, 1 lowercase and be 6+ characters."
       );
       return;
     }
 
     try {
-      // Create User
       await createUser(email, password, name, photoURL);
       toast.success("Registration Successful!");
       navigate("/login");
@@ -43,100 +41,90 @@ const Register = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
       <Helmet>
         <title>Register Page</title>
       </Helmet>
-      <div className="hero-content flex-col lg:flex-row-reverse gap-6 p-4 sm:p-6">
-        <div className="text-center lg:text-left"></div>
-        <div className="card bg-base-100 w-full max-w-sm mx-auto p-6 shadow-2xl">
-          <form onSubmit={handleRegister} className="card-body">
-            <h1 className="text-3xl lg:text-5xl font-bold">Register now!</h1>
 
-            {/* Name Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
+      <div className="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-xl">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-700">
+          Create an Account
+        </h1>
+
+        <form onSubmit={handleRegister} className="space-y-4">
+          {/* Name */}
+          <div>
+            <label className="block text-gray-700 mb-1">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              className="input input-bordered w-full bg-gray-200 p-3"
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              className="input input-bordered w-full bg-gray-200 p-3"
+              required
+            />
+          </div>
+
+          {/* Photo URL */}
+          <div>
+            <label className="block text-gray-700 mb-1">Photo URL</label>
+            <input
+              type="text"
+              name="photoURL"
+              placeholder="Photo URL (optional)"
+              className="input input-bordered w-full bg-gray-200 p-3"
+            />
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-gray-700 mb-1">Password</label>
+            <div className="relative">
               <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="input input-bordered p-4"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                className="input input-bordered w-full bg-gray-200 p-3 pr-12"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 text-sm text-gray-500"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
             </div>
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          </div>
 
-            {/* Email Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                className="input input-bordered p-4"
-                required
-              />
-            </div>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full btn bg-orange-400 border-none text-white hover:bg-orange-500"
+          >
+            Register
+          </button>
 
-            {/* Photo URL Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
-              </label>
-              <input
-                type="text"
-                name="photoURL"
-                placeholder="Photo URL"
-                className="input input-bordered p-4"
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Your Password"
-                  className="input input-bordered p-4 w-full"
-                  required
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-2 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-              </div>
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-            </div>
-
-            {/* Submit Button */}
-            <div className="form-control mt-6">
-              <button className="btn btn-primary btn-wide">Register</button>
-            </div>
-
-            {/* Link to Login */}
-            <div className="form-control mt-6">
-              <p className="text-sm text-gray-500">
-                Already have an account?{" "}
-                <Link
-                  to="/"
-                  className="text-blue-500 hover:underline font-semibold"
-                >
-                  Login
-                </Link>
-              </p>
-            </div>
-          </form>
-        </div>
+          {/* Redirect to Login */}
+          <p className="text-center text-sm text-gray-600 mt-4">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
     const { data } = await axios.post(
       "http://localhost:5000/logout",
       {},
-      // { withCredentials: true }
+      { withCredentials: true }
     );
     console.log(data);
     return signOut(auth);
@@ -60,9 +60,9 @@ const AuthProvider = ({ children }) => {
   
         try {
           const response = await axios.post(
-            "http://localhost:5000//login",
+            "http://localhost:5000/login",
             { email: currentUser?.email },
-            // { withCredentials: true }
+            { withCredentials: true }
           );
           console.log("Server Response:", response.data);
         } catch (error) {

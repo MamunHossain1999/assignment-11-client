@@ -28,7 +28,7 @@ const Navber = () => {
       : "hover:text-orange-500 px-3 py-2";
 
   return (
-    <div className="w-full bg-gray-400 sticky top-0 z-50 bg-opacity-40 backdrop-blur-md">
+    <div className="w-full bg-green-900 sticky top-0 z-50  ">
       <div className="navbar container mx-auto text-white p-4">
 
         {/* Logo */}

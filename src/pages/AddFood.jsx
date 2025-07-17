@@ -1,64 +1,77 @@
-import React, { useContext, useState } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../providers/AuthProvider';
-import { Helmet } from 'react-helmet';
-import Swal from 'sweetalert2';
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
+import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
+
+  const defaultExpireDate = () => {
+    const now = new Date();
+    now.setHours(now.getHours() + 6); // 6 hours ahead
+    return now.toISOString().slice(0, 16); // format for datetime-local
+  };
+
   const [formData, setFormData] = useState({
-    foodName: '',
-    foodImage: '',
-    foodQuantity: '',
-    pickupLocation: '',
-    expireDate: '',
-    additionalNotes: '',
-    foodStatus: 'available',
+    foodName: "",
+    foodImage: "",
+    foodQuantity: "",
+    pickupLocation: "Dhaka",
+    expireDate: defaultExpireDate(),
+    additionalNotes: "",
+    foodStatus: "available",
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        donatorName: user.displayName,
+        donatorEmail: user.email,
+        donatorImage: user.photoURL || "",
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const donatorData = {
-      donatorName: user.displayName,
-      donatorEmail: user.email,
-      donatorImage: user.photoURL || '',
-    };
-
-    const dataToSubmit = { ...formData, ...donatorData };
-
     axios
-      .post('http://localhost:5000/foods', dataToSubmit, { withCredentials: true })
+      .post("http://localhost:5000/foods", formData, { withCredentials: true })
       .then(() => {
         Swal.fire({
-          icon: 'success',
-          title: 'Success!',
-          text: 'Food added successfully!',
+          icon: "success",
+          title: "Success!",
+          text: "Food added successfully!",
           timer: 3000,
           timerProgressBar: true,
         });
 
         setFormData({
-          foodName: '',
-          foodImage: '',
-          foodQuantity: '',
-          pickupLocation: '',
-          expireDate: '',
-          additionalNotes: '',
-          foodStatus: 'available',
+          foodName: "",
+          foodImage: "",
+          foodQuantity: "",
+          pickupLocation: "Dhaka",
+          expireDate: defaultExpireDate(),
+          additionalNotes: "",
+          foodStatus: "available",
+          donatorName: user.displayName,
+          donatorEmail: user.email,
+          donatorImage: user.photoURL || "",
         });
       })
       .catch((error) => {
-        console.error('Error adding food:', error);
+        console.error("Error adding food:", error);
         Swal.fire({
-          icon: 'error',
-          title: 'Failed',
-          text: 'Failed to add food. Please try again later.',
+          icon: "error",
+          title: "Failed",
+          text: "Failed to add food. Please try again later.",
         });
       });
   };
@@ -69,7 +82,10 @@ const AddFood = () => {
         <title>Add Food</title>
       </Helmet>
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Add a Food</h2>
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-3 rounded-md bg-white shadow-md">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-2xl mx-auto p-3 rounded-md bg-white shadow-md"
+      >
         {/* Food Name */}
         <div className="mb-6">
           <label className="block mb-2 text-lg font-medium text-gray-700">Food Name</label>
@@ -115,15 +131,18 @@ const AddFood = () => {
         {/* Pickup Location */}
         <div className="mb-6">
           <label className="block mb-2 text-lg font-medium text-gray-700">Pickup Location</label>
-          <input
-            type="text"
+          <select
             name="pickupLocation"
             value={formData.pickupLocation}
             onChange={handleChange}
-            placeholder="Enter pickup location"
             className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
-            required
-          />
+          >
+            <option>Dhaka</option>
+            <option>Chittagong</option>
+            <option>Khulna</option>
+            <option>Rajshahi</option>
+            <option>Barisal</option>
+          </select>
         </div>
 
         {/* Expire Date */}
@@ -139,7 +158,7 @@ const AddFood = () => {
           />
         </div>
 
-        {/* Notes */}
+        {/* Additional Notes */}
         <div className="mb-6">
           <label className="block mb-2 text-lg font-medium text-gray-700">Additional Notes</label>
           <textarea

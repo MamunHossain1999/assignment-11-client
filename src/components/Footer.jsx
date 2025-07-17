@@ -3,7 +3,7 @@ import logo from '../assets/foodCompanyLogo.png';
 const Footer = () => {
   return (
     <footer className="bg-gray-400 text-white p-4 sm:p-10">
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-10">
         
         {/* Services Section */}
         <nav>

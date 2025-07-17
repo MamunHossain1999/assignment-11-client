@@ -54,25 +54,49 @@ const Home = () => {
 
       {/* Featured Foods Section */}
       <div className="container mx-auto pb-7">
-        <h2 className="text-3xl font-bold mb-3 text-center text-black">
+        <h2 className="text-lg md:text-3xl font-bold md:mb-3 text-center text-black">
           Featured Foods
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
           {displayedFoods?.map((food) => (
-            <div key={food._id} className="card bg-base-100 shadow-md ">
+            <div
+              key={food._id}
+              className="card bg-base-100 rounded-lg shadow-md"
+            >
               <figure>
                 <img
                   src={food.foodImage}
                   alt={food.foodName}
-                  className="w-full h-64 object-cover ease-in-out hover:scale-105  transform transition duration-300 "
+                  className="w-full h-64 object-cover ease-in-out hover:scale-105 transform transition duration-300"
                 />
               </figure>
-              <div className="card-body bg-white ">
+              <div className="p-2 bg-white">
                 <h2 className="card-title text-lg font-semibold text-gray-800">
                   {food.foodName}
                 </h2>
                 <p className="text-gray-600">{food.additionalNotes}</p>
-                <div className="card-actions justify-end">
+
+                {/* Features Below */}
+                <ul className="text-sm text-gray-700 mt-2 space-y-1">
+                  <li>
+                    <span className="font-medium">Price:</span> $
+                    {food.price || "10.99"}
+                  </li>
+                  <li>
+                    <span className="font-medium">Rating:</span> ⭐{" "}
+                    {food.rating || "4.5"}
+                  </li>
+                  <li>
+                    <span className="font-medium">Available:</span>{" "}
+                    {food.quantity || 20} pcs
+                  </li>
+                  <li>
+                    <span className="font-medium">Category:</span>{" "}
+                    {food.category || "Fast Food"}
+                  </li>
+                </ul>
+
+                <div className="card-actions justify-end mt-4">
                   <button
                     className="btn bg-orange-300 border-none text-white hover:bg-orange-400"
                     onClick={() => handleViewDetails(food._id)}
@@ -90,7 +114,7 @@ const Home = () => {
           <div className="text-center py-4">
             <button
               onClick={() => setShowAll(true)}
-              className="btn bg-orange-300 border-none text-white hover:bg-orange-400"
+              className="btn bg-orange-300 border-none w-36 text-white hover:bg-orange-400"
             >
               See All
             </button>

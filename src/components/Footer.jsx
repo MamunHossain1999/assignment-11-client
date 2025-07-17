@@ -47,7 +47,7 @@ const Footer = () => {
                 placeholder="username@site.com"
                 className="input text-white w-full bg-primary sm:flex-1 p-2"
               />
-              <button className="btn bg-orange-300 text-white border-none w-full sm:w-auto px-6">Subscribe</button>
+              <button className="btn bg-orange-300 hover:bg-orange-400 text-white border-none w-full sm:w-auto px-6">Subscribe</button>
             </div>
           </fieldset>
         </form>

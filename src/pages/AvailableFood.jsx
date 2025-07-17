@@ -17,7 +17,9 @@ const AvailableFood = () => {
 
   useEffect(() => {
     axios
-      .get("https://food-hazel-three.vercel.app/foods", { withCredentials: true })
+      .get("http://localhost:5000/foods", {
+        withCredentials: true,
+      })
       .then((response) => {
         const availableFoods = response.data.filter(
           (food) => food.foodStatus === "available"
@@ -71,32 +73,38 @@ const AvailableFood = () => {
       <Helmet>
         <title>Available Foods</title>
       </Helmet>
-      
+
       {/* Search and button section */}
-      
+
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-  {/* Search Input */}
-  <input
-    type="text"
-    placeholder="Search"
-    className="input input-bordered w-full sm:w-1/3 p-3"
-    value={search}
-    onChange={handleSearch}
-  />
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-full sm:w-1/3 p-3"
+          value={search}
+          onChange={handleSearch}
+        />
 
-  {/* Button Group */}
-  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-    {/* Sort Button */}
-    <button className="btn btn-primary w-full sm:w-auto" onClick={handleSort}>
-      Sort by Expiry Date
-    </button>
+        {/* Button Group */}
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          {/* Sort Button */}
+          <button
+            className="btn btn-primary w-full sm:w-auto"
+            onClick={handleSort}
+          >
+            Sort by Expiry Date
+          </button>
 
-    {/* Layout Toggle Button */}
-    <button className="btn btn-secondary w-full sm:w-auto" onClick={toggleLayout}>
-      {isThreeColumn ? "Three Column" : "Four Column"}
-    </button>
-  </div>
-</div>
+          {/* Layout Toggle Button */}
+          <button
+            className="btn btn-secondary w-full sm:w-auto"
+            onClick={toggleLayout}
+          >
+            {isThreeColumn ? "Three Column" : "Four Column"}
+          </button>
+        </div>
+      </div>
 
       {/* Food grid layout */}
       <div

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import ThemeController from "../themeControl/ThemeCortroller";
+import ThemeController from "../themeControl/ThemeCortroller"; // optional
 import companyLogo from "../assets/foodCompanyLogo.png";
 
 const Navber = () => {
@@ -9,7 +9,7 @@ const Navber = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle Logout
+  // Logout handler
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -21,19 +21,49 @@ const Navber = () => {
       });
   };
 
+  // NavLink active styles
+  const navLinkStyle = ({ isActive }) =>
+    isActive
+      ? "text-orange-400 font-semibold px-3 py-2"
+      : "hover:text-orange-500 px-3 py-2";
+
   return (
-    <div className="w-full bg-gray-400 dark:bg-slate-800 sticky top-0 z-50 bg-opacity-40 backdrop-blur-md">
-      <div className="navbar w-11/12 mx-auto text-white p-4">
-        
-        {/* Navbar Start */}
-        <div className="navbar-start flex items-center">
-          
-          {/* Dropdown for Mobile */}
-          <div className="dropdown">
+    <div className="w-full bg-gray-400 sticky top-0 z-50 bg-opacity-40 backdrop-blur-md">
+      <div className="navbar container mx-auto text-white p-4">
+
+        {/* Logo */}
+        <div className="navbar-start flex items-center gap-2">
+          <img
+            className="w-12 rounded-full "
+            src={companyLogo}
+            alt="Company Logo"
+          />
+          <p className="text-2xl font-bold text-transparent hidden md:block bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
+            Food Sharing
+          </p>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal p-0 space-x-1">
+            <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
+            <li><NavLink to="/available-foods" className={navLinkStyle}>Available Foods</NavLink></li>
+            <li><NavLink to="/add-food" className={navLinkStyle}>Add Food</NavLink></li>
+            <li><NavLink to="/manage-my-foods" className={navLinkStyle}>Manage My Foods</NavLink></li>
+            <li><NavLink to="/my-food-request" className={navLinkStyle}>My Food Request</NavLink></li>
+          </ul>
+        </div>
+
+        {/* Right Side */}
+        <div className="navbar-end gap-4">
+
+          {/* Theme Toggle - Optional */}
+          {/* <ThemeController /> */}
+
+          {/* Hamburger for mobile */}
+          <div className="dropdown lg:hidden">
             <button
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost lg:hidden text-white bg-gray-400"
+              className="btn btn-ghost text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
@@ -51,125 +81,23 @@ const Navber = () => {
                 />
               </svg>
             </button>
-            <ul
-              className={`absolute left-0 top-14 w-52 p-2 shadow-lg bg-gray-500 rounded-box z-10 ${
-                isMenuOpen ? "block" : "hidden"
-              }`}
-            >
-              <li>
-                <NavLink
-                  to="/"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/available-foods"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  Available Foods
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/add-food"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  Add Food
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/manage-my-foods"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  Manage My Foods
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/my-food-request"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  My Food Request
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/login"
-                  className="hover:bg-indigo-600 hover:text-white"
-                >
-                  Login
-                </NavLink>
-              </li>
-            </ul>
+            {isMenuOpen && (
+              <ul className="absolute right-4 top-14 bg-gray-600 text-white p-4 rounded-lg space-y-2 z-50 w-52">
+                <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
+                <li><NavLink to="/available-foods" className={navLinkStyle}>Available Foods</NavLink></li>
+                <li><NavLink to="/add-food" className={navLinkStyle}>Add Food</NavLink></li>
+                <li><NavLink to="/manage-my-foods" className={navLinkStyle}>Manage My Foods</NavLink></li>
+                <li><NavLink to="/my-food-request" className={navLinkStyle}>My Food Request</NavLink></li>
+                {!user && (
+                  <li><NavLink to="/login" className={navLinkStyle}>Login</NavLink></li>
+                )}
+              </ul>
+            )}
           </div>
 
-          {/* Logo Section */}
-          <div className="flex items-center gap-2">
-            <img
-              className="w-12 rounded-full hidden md:block"
-              src={companyLogo}
-              alt="Company Logo"
-            />
-            <p className="text-3xl text-transparent hidden md:block bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-500 to-orange-500">
-              Food Sharing
-            </p>
-          </div>
-        </div>
-
-        {/* Navbar Center */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">
-            <li>
-              <NavLink to="/" className="hover:bg-indigo-600 hover:text-white">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/available-foods"
-                className="hover:bg-indigo-600 hover:text-white"
-              >
-                Available Foods
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/add-food"
-                className="hover:bg-indigo-600 hover:text-white"
-              >
-                Add Food
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/manage-my-foods"
-                className="hover:bg-indigo-600 hover:text-white"
-              >
-                Manage My Foods
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/my-food-request"
-                className="hover:bg-indigo-600 hover:text-white"
-              >
-                My Food Request
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-
-        {/* Navbar End */}
-        <div className="navbar-end gap-4">
-          <ThemeController />
-
-          {/* User Avatar */}
+          {/* Login/Logout: lg only */}
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-4">
               <img
                 referrerPolicy="no-referrer"
                 src={user.photoURL}
@@ -178,7 +106,7 @@ const Navber = () => {
               />
               <button
                 onClick={handleLogout}
-                className="btn bg-red-500 border-none w-16 h-8 hover:bg-red-400 text-black dark:bg-pink-500 dark:hover:bg-pink-400"
+                className="btn bg-red-500 border-none hover:bg-red-400 text-white"
               >
                 Logout
               </button>
@@ -186,7 +114,7 @@ const Navber = () => {
           ) : (
             <NavLink
               to="/login"
-              className="btn btn-primary hover:bg-purple-600 border-none text-white"
+              className="btn bg-orange-300 hover:bg-orange-400 border-none text-white hidden lg:flex"
             >
               Login
             </NavLink>

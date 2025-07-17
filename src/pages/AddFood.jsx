@@ -16,13 +16,11 @@ const AddFood = () => {
     foodStatus: 'available',
   });
 
-  // Input field update handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Form submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -35,13 +33,12 @@ const AddFood = () => {
     const dataToSubmit = { ...formData, ...donatorData };
 
     axios
-      .post('https://food-hazel-three.vercel.app/foods', dataToSubmit, { withCredentials: true })
+      .post('http://localhost:5000/foods', dataToSubmit, { withCredentials: true })
       .then(() => {
         Swal.fire({
           icon: 'success',
           title: 'Success!',
           text: 'Food added successfully!',
-          confirmButtonText: 'OK',
           timer: 3000,
           timerProgressBar: true,
         });
@@ -62,104 +59,101 @@ const AddFood = () => {
           icon: 'error',
           title: 'Failed',
           text: 'Failed to add food. Please try again later.',
-          confirmButtonText: 'OK',
         });
       });
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto sm:p-10 bg-slate-400 dark:bg-slate-800 rounded-lg shadow-md py-10">
+    <div className="w-full mx-auto sm:p-10 bg-gray-100 shadow-md py-10">
       <Helmet>
         <title>Add Food</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center text-white dark:text-gray-100 mb-8">
-        Add a Food
-      </h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Add a Food</h2>
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-3 rounded-md bg-white shadow-md">
+        {/* Food Name */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Food Name
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Name</label>
           <input
             type="text"
             name="foodName"
             value={formData.foodName}
             onChange={handleChange}
             placeholder="Enter food name"
-            className="input input-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
             required
           />
         </div>
+
+        {/* Food Image */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Food Image URL
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Image URL</label>
           <input
             type="text"
             name="foodImage"
             value={formData.foodImage}
             onChange={handleChange}
             placeholder="Enter image URL"
-            className="input input-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
             required
           />
         </div>
+
+        {/* Food Quantity */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Food Quantity
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Food Quantity</label>
           <input
             type="text"
             name="foodQuantity"
             value={formData.foodQuantity}
             onChange={handleChange}
             placeholder="Enter quantity (e.g., 5 plates)"
-            className="input input-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
             required
           />
         </div>
+
+        {/* Pickup Location */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Pickup Location
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Pickup Location</label>
           <input
             type="text"
             name="pickupLocation"
             value={formData.pickupLocation}
             onChange={handleChange}
             placeholder="Enter pickup location"
-            className="input input-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
             required
           />
         </div>
+
+        {/* Expire Date */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Expire Date/Time
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Expire Date/Time</label>
           <input
             type="datetime-local"
             name="expireDate"
             value={formData.expireDate}
             onChange={handleChange}
-            className="input input-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="input input-bordered w-full p-3 bg-white rounded-md text-gray-800"
             required
           />
         </div>
+
+        {/* Notes */}
         <div className="mb-6">
-          <label className="block mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-            Additional Notes
-          </label>
+          <label className="block mb-2 text-lg font-medium text-gray-700">Additional Notes</label>
           <textarea
             name="additionalNotes"
             value={formData.additionalNotes}
             onChange={handleChange}
             placeholder="Enter any additional information"
-            className="textarea textarea-bordered w-full p-3 rounded-md text-gray-700 dark:text-gray-300 dark:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="textarea textarea-bordered w-full p-3 bg-white rounded-md text-gray-800"
           />
         </div>
+
         <button
           type="submit"
-          className="btn btn-primary w-full p-3 rounded-md text-white transition duration-300"
+          className="btn bg-orange-300 hover:bg-orange-400 border-none w-full p-3 rounded-md text-white transition duration-300"
         >
           Add Food
         </button>

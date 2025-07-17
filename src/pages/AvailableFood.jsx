@@ -7,7 +7,7 @@ import axios from "axios";
 import FoodCard from "./FoodCard";
 
 const fetchAvailableFoods = async () => {
-  const res = await axios.get("http://localhost:5000/foods");
+  const res = await axios.get("https://food-hazel-three.vercel.app/foods");
   return res.data.filter((food) => food.foodStatus === "available");
 };
 

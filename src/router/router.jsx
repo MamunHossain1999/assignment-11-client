@@ -26,27 +26,27 @@ import ThemeController from '../themeControl/ThemeCortroller';
       },
       {
         path: '/available-foods',
-        element: <AvailableFood/>
+        element: <PrivateRoute><AvailableFood/></PrivateRoute>
       },
       {
         path: '/add-food',
-        element: <AddFood/>
+        element: <PrivateRoute><AddFood/></PrivateRoute>
       },
       {
         path: '/manage-my-foods',
-        element:<ManageMyFoods/>
+        element:<PrivateRoute><ManageMyFoods/></PrivateRoute>
       },
       {
         path: '/update-food/:id',
-        element: <UpdateFood/>
+        element: <PrivateRoute><UpdateFood/></PrivateRoute>
       },
       {
         path: '/food/:id',
-        element: <FoodDetails/>
+        element: <PrivateRoute><FoodDetails/></PrivateRoute>
       },
       {
         path: '/my-food-request',
-        element:<MyFoodRequest/>
+        element:<PrivateRoute><MyFoodRequest/></PrivateRoute>
       },
       {
         path: '/darkLight',

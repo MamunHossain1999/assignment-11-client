@@ -9,8 +9,8 @@ const AddFood = () => {
 
   const defaultExpireDate = () => {
     const now = new Date();
-    now.setHours(now.getHours() + 6); // 6 hours ahead
-    return now.toISOString().slice(0, 16); // format for datetime-local
+    now.setHours(now.getHours() + 6); 
+    return now.toISOString().slice(0, 16); 
   };
 
   const [formData, setFormData] = useState({
@@ -43,7 +43,7 @@ const AddFood = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/foods", formData, { withCredentials: true })
+      .post("https://food-hazel-three.vercel.app/foods", formData, { withCredentials: true })
       .then(() => {
         Swal.fire({
           icon: "success",

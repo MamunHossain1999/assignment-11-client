@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 // Fetch food details function
 const fetchFoodDetails = async (id) => {
-  const res = await axios.get(`http://localhost:5000/foods/${id}`, {
+  const res = await axios.get(`https://food-hazel-three.vercel.app/foods/${id}`, {
     withCredentials: true,
   });
   return res.data;
@@ -57,12 +57,12 @@ const FoodDetails = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/foodData", requestData, {
+      await axios.post("https://food-hazel-three.vercel.app/foodData", requestData, {
         withCredentials: true,
       });
 
       await axios.put(
-        `http://localhost:5000/foods/${food._id}`,
+        `https://food-hazel-three.vercel.app/foods/${food._id}`,
         {
           ...food,
           foodStatus: "requested",

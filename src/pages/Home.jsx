@@ -7,7 +7,7 @@ import Carousel from "./Carousel";
 import { Helmet } from "react-helmet";
 
 const fetchFoods = async () => {
-  const res = await axios.get("http://localhost:5000/foods", {
+  const res = await axios.get("https://food-hazel-three.vercel.app/foods", {
     withCredentials: true,
   });
   return res.data;

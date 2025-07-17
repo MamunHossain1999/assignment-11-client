@@ -16,7 +16,7 @@ const MyFoodRequest = () => {
       if (!user?.email) return [];
 
       const res = await fetch(
-        `http://localhost:5000/food-requests?email=${user.email}`,
+        `https://food-hazel-three.vercel.app/food-requests?email=${user.email}`,
         {
           credentials: "include",
         }

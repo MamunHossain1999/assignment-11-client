@@ -17,9 +17,9 @@ const MyFoodRequest = () => {
 
       const res = await fetch(
         `https://food-hazel-three.vercel.app/food-requests?email=${user.email}`,
-        {
-          credentials: "include",
-        }
+        
+          { withCredentials: true }
+        
       );
 
       if (!res.ok) {

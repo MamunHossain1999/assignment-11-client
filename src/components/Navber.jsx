@@ -21,20 +21,20 @@ const Navber = () => {
       });
   };
 
-  // NavLink active styles
+  // NavLink active style
   const navLinkStyle = ({ isActive }) =>
     isActive
       ? "text-orange-400 font-semibold px-3 py-2"
       : "hover:text-orange-500 px-3 py-2";
 
   return (
-    <div className="w-full bg-green-900 sticky top-0 z-50  ">
+    <div className="w-full bg-green-900 sticky top-0 z-50">
       <div className="navbar container mx-auto text-white p-4">
 
         {/* Logo */}
         <div className="navbar-start flex items-center gap-2">
           <img
-            className="w-12 rounded-full "
+            className="w-12 rounded-full"
             src={companyLogo}
             alt="Company Logo"
           />
@@ -57,10 +57,10 @@ const Navber = () => {
         {/* Right Side */}
         <div className="navbar-end gap-4">
 
-          {/* Theme Toggle - Optional */}
+          {/* Theme Toggle - optional */}
           {/* <ThemeController /> */}
 
-          {/* Hamburger for mobile */}
+          {/* Mobile Menu Button */}
           <div className="dropdown lg:hidden">
             <button
               className="btn btn-ghost text-white"
@@ -81,6 +81,8 @@ const Navber = () => {
                 />
               </svg>
             </button>
+
+            {/* Mobile Dropdown Menu */}
             {isMenuOpen && (
               <ul className="absolute right-4 top-14 bg-gray-600 text-white p-4 rounded-lg space-y-2 z-50 w-52">
                 <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
@@ -88,14 +90,38 @@ const Navber = () => {
                 <li><NavLink to="/add-food" className={navLinkStyle}>Add Food</NavLink></li>
                 <li><NavLink to="/manage-my-foods" className={navLinkStyle}>Manage My Foods</NavLink></li>
                 <li><NavLink to="/my-food-request" className={navLinkStyle}>My Food Request</NavLink></li>
-                {!user && (
-                  <li><NavLink to="/login" className={navLinkStyle}>Login</NavLink></li>
+
+                {/* Mobile Login/Logout */}
+                {user ? (
+                  <li className="flex flex-col gap-2 items-start">
+                    <img
+                      referrerPolicy="no-referrer"
+                      src={user.photoURL}
+                      alt="User Avatar"
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <button
+                      onClick={handleLogout}
+                      className="btn bg-red-500 border-none hover:bg-red-400 text-white w-full"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                ) : (
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className="btn bg-orange-300 hover:bg-orange-400 border-none text-white w-full"
+                    >
+                      Login
+                    </NavLink>
+                  </li>
                 )}
               </ul>
             )}
           </div>
 
-          {/* Login/Logout: lg only */}
+          {/* Desktop Login/Logout */}
           {user ? (
             <div className="hidden lg:flex items-center gap-4">
               <img

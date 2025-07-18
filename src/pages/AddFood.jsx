@@ -43,7 +43,7 @@ const AddFood = () => {
     e.preventDefault();
 
     axios
-      .post("https://food-hazel-three.vercel.app/foods", formData, { withCredentials: true })
+      .post("https://lustrous-cassata-4ef2e4.netlify.app/foods", formData, { withCredentials: true })
       .then(() => {
         Swal.fire({
           icon: "success",

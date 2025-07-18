@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -19,6 +19,9 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const password = form.password.value;
 
+    console.log("Form Values:", { name, email, photoURL, password });
+
+    // Validation
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const isValidLength = password.length >= 6;
@@ -27,15 +30,23 @@ const Register = () => {
       setError(
         "Password must contain at least 1 uppercase, 1 lowercase and be 6+ characters."
       );
+      console.warn("Password validation failed");
       return;
     }
 
     try {
-      await createUser(email, password, name, photoURL);
+      // Create user with email & password
+      const result = await createUser(email, password);
+      console.log("User created:", result.user);
+
+      // Update display name & photo
+      await updateUserProfile(name, photoURL);
+      console.log("User profile updated");
+
       toast.success("Registration Successful!");
       navigate("/login");
     } catch (err) {
-      console.log(err);
+      console.error("Registration Error:", err.message);
       toast.error(err.message);
     }
   };

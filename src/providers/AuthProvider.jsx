@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase.config";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -34,16 +34,23 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const logOut = async () => {
-    setLoading(true);
+const logOut = async () => {
+  try {
     const { data } = await axios.post(
       "https://food-hazel-three.vercel.app/logout",
       {},
       { withCredentials: true }
     );
     console.log(data);
-    return signOut(auth);
-  };
+
+    await signOut(auth);
+    toast.success("✅ Logged out successfully!");
+  } catch (error) {
+    console.error("Logout error:", error);
+    toast.error("❌ Logout failed!");
+  }
+};
+
 
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
@@ -57,7 +64,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
-  
+
         try {
           const response = await axios.post(
             "https://food-hazel-three.vercel.app/login",
@@ -73,12 +80,11 @@ const AuthProvider = ({ children }) => {
       }
       setLoading(false);
     });
-  
+
     return () => {
       unsubscribe();
     };
   }, []);
-  
 
   const authInfo = {
     user,

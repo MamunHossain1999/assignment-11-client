@@ -7,7 +7,7 @@ const MyFoodRequest = () => {
   const { user } = useContext(AuthContext);
 
   const {
-    data: users,
+    data: users = [],
     isLoading,
     error,
   } = useQuery({
@@ -17,9 +17,13 @@ const MyFoodRequest = () => {
 
       const res = await fetch(
         `https://food-hazel-three.vercel.app/food-requests?email=${user.email}`,
-        
-          { withCredentials: true }
-        
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // ✅ This is the correct way
+        }
       );
 
       if (!res.ok) {
@@ -36,7 +40,7 @@ const MyFoodRequest = () => {
   }
 
   if (error) {
-    return <div className="text-center text-black">Error: {error.message}</div>;
+    return <div className="text-center text-red-500">Error: {error.message}</div>;
   }
 
   return (
@@ -44,7 +48,7 @@ const MyFoodRequest = () => {
       <Helmet>
         <title>MyFoodRequest</title>
       </Helmet>
-      <h2 className="text-lx md:text-3xl font-bold text-center text-gray-800 mb-6">
+      <h2 className="text-xl md:text-3xl font-bold text-center text-gray-800 mb-6">
         My Food Requests
       </h2>
 
@@ -60,7 +64,7 @@ const MyFoodRequest = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {users?.map((request) => (
+            {users.map((request) => (
               <tr
                 key={request._id}
                 className="hover:bg-gray-100 transition-all duration-200"
@@ -81,7 +85,7 @@ const MyFoodRequest = () => {
 
       {/* Mobile View */}
       <div className="lg:hidden mt-6">
-        {users?.map((request) => (
+        {users.map((request) => (
           <div
             key={request._id}
             className="border p-4 mb-4 shadow-lg rounded-lg bg-white"

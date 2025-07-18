@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import ThemeController from "../themeControl/ThemeCortroller"; // optional
+
 import companyLogo from "../assets/foodCompanyLogo.png";
 
 const Navber = () => {
@@ -13,7 +13,6 @@ const Navber = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        alert("Logged out successfully!");
         navigate("/login");
       })
       .catch((error) => {
@@ -30,7 +29,6 @@ const Navber = () => {
   return (
     <div className="w-full bg-green-900 sticky top-0 z-50">
       <div className="navbar container mx-auto text-white p-4">
-
         {/* Logo */}
         <div className="navbar-start flex items-center gap-2">
           <img
@@ -46,17 +44,36 @@ const Navber = () => {
         {/* Desktop Menu */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0 space-x-1">
-            <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
-            <li><NavLink to="/available-foods" className={navLinkStyle}>Available Foods</NavLink></li>
-            <li><NavLink to="/add-food" className={navLinkStyle}>Add Food</NavLink></li>
-            <li><NavLink to="/manage-my-foods" className={navLinkStyle}>Manage My Foods</NavLink></li>
-            <li><NavLink to="/my-food-request" className={navLinkStyle}>My Food Request</NavLink></li>
+            <li>
+              <NavLink to="/" className={navLinkStyle}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/available-foods" className={navLinkStyle}>
+                Available Foods
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/add-food" className={navLinkStyle}>
+                Add Food
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/manage-my-foods" className={navLinkStyle}>
+                Manage My Foods
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/my-food-request" className={navLinkStyle}>
+                My Food Request
+              </NavLink>
+            </li>
           </ul>
         </div>
 
         {/* Right Side */}
         <div className="navbar-end gap-4">
-
           {/* Theme Toggle - optional */}
           {/* <ThemeController /> */}
 
@@ -85,11 +102,31 @@ const Navber = () => {
             {/* Mobile Dropdown Menu */}
             {isMenuOpen && (
               <ul className="absolute right-4 top-14 bg-gray-600 text-white p-4 rounded-lg space-y-2 z-50 w-52">
-                <li><NavLink to="/" className={navLinkStyle}>Home</NavLink></li>
-                <li><NavLink to="/available-foods" className={navLinkStyle}>Available Foods</NavLink></li>
-                <li><NavLink to="/add-food" className={navLinkStyle}>Add Food</NavLink></li>
-                <li><NavLink to="/manage-my-foods" className={navLinkStyle}>Manage My Foods</NavLink></li>
-                <li><NavLink to="/my-food-request" className={navLinkStyle}>My Food Request</NavLink></li>
+                <li>
+                  <NavLink to="/" className={navLinkStyle}>
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/available-foods" className={navLinkStyle}>
+                    Available Foods
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/add-food" className={navLinkStyle}>
+                    Add Food
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/manage-my-foods" className={navLinkStyle}>
+                    Manage My Foods
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my-food-request" className={navLinkStyle}>
+                    My Food Request
+                  </NavLink>
+                </li>
 
                 {/* Mobile Login/Logout */}
                 {user ? (
